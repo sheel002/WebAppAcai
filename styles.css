@@ -1,0 +1,74 @@
+/* Reset default margin and padding for the body and header */
+body, header {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+	align-items: center;
+    background-color: #F8E4E4; /* Background color for the header */
+    color: white;
+    padding: 10px 20px; /* Add padding for spacing above and below the navigation bar */
+    text-align: center; /* Center text within the header */
+}
+
+/* Reset some default styles for the list and anchor tags */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: inline;
+    margin: 0 20px; /* Add spacing between the navigation links */
+}
+
+/* Style the logo container */
+.logo img {
+    max-height: 100px; /* Set the maximum height for the logo */
+}
+
+/* Center the navigation bar horizontally */
+.navbar {
+	margin-right: 60px;
+	display: flex;
+    text-align: center;
+    background-color: #F8E4E4; /* Background color for the navbar */
+	padding: 10px 20px; /* Add padding for spacing around the navigation */
+}   
+
+/* Style the anchor (link) tags */
+.navbar a {
+	font-family: Lato, sans-serif; /* Replace "FontName" with your chosen font */
+    text-decoration: none;
+    color: #a2a0a0; /* Change the text color as needed */
+    text-decoration: none;
+    color: grey;
+    font-weight: bold;
+}
+
+/* Style the anchor tags when hovered over */
+.navbar a:hover {
+    color: #000000; /* Change the color when hovered over */
+}
+
+/* Style the banner container */
+.banner {
+    display: flex;
+    background-color: #f5d6d6; /* Background color for the banner */
+    color: grey;
+	padding: 50px 0; /* Add vertical padding to separate from the navigation */
+}
+
+/* Style the banner photo */
+.banner-photo {
+    flex: 1;
+    text-align: center;
+    padding: 5px; /* Add padding for spacing around the photo */
+}
+
+.banner-photo img {
+    max-width: 100%; /* Ensure the photo doesn't exceed its container's width */
+}
