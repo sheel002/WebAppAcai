@@ -1,7 +1,13 @@
+
+/* Index Design */
 /* Reset default margin and padding for the body and header */
 body, header {
     margin: 0;
     padding: 0;
+}
+
+body {font-family:Lato,  sans-serif;
+    background-color: #F8E4E4;
 }
 
 header {
@@ -72,3 +78,54 @@ li {
 .banner-photo img {
     max-width: 100%; /* Ensure the photo doesn't exceed its container's width */
 }
+/* Index Design */
+
+/* Outlet Design*/
+/* Style the outlets section */
+.outlets-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 50px 20px;
+}
+
+/* Style each outlet */
+.outlet {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.outlet h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.outlet p {
+    margin: 10px 0;
+    color: grey;
+    font-size: 14px;
+}
+
+.outlet a {
+    display: block;
+    text-align: center;
+    background-color: #a2a0a0;
+    color: #FFFFFF;
+    padding: 10px;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.outlet a:hover {
+    background-color: #000000;
+}
+
+/* Outlet Design*/
