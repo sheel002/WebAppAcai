@@ -82,50 +82,112 @@ li {
 
 /* Outlet Design*/
 /* Style the outlets section */
+/* Additions for the Outlet Page */
 .outlets-section {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    padding: 50px 20px;
+    justify-content: space-between;
 }
 
-/* Style each outlet */
 .outlet {
-    background-color: #FFFFFF;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    flex: 1; 
+    padding: 0 15px; /* This gives some spacing between the outlets */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the content horizontally */
 }
+
+.outlet img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px; /* Add some space between the image and the content below */
+}
+
 
 .outlet h2 {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 20px;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .outlet p {
-    margin: 10px 0;
-    color: grey;
-    font-size: 14px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .outlet a {
-    display: block;
-    text-align: center;
-    background-color: #a2a0a0;
-    color: #FFFFFF;
-    padding: 10px;
-    margin-top: 20px;
-    text-decoration: none;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #FF6347; /* Add a desired color */
+    color: #ffffff;
     border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
 }
 
 .outlet a:hover {
-    background-color: #000000;
+    background-color: #FF4500; /* Adjust as desired */
+}
+/* Outlet Design*/
+
+
+/*  Contact Form Design */
+.contact-section {
+    padding: 30px;
+    text-align: center;
+    background-color: #f5d6d6; /* Updated background color */
+    border-radius: 10px;
 }
 
-/* Outlet Design*/
+.contact-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.contact-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.contact-section form input, .contact-section form textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.contact-section form input[type="submit"] {
+    background-color: #84c0c9;
+    color: white;
+    cursor: pointer;
+}
+
+/* Error tooltip */
+.error-tooltip {
+    display: none;
+    padding: 2px 4px;  /* Further reduced padding */
+    width: auto;       /* Width will be based on content size */
+    max-width: 180px;  /* Maximum width to prevent it from getting too long */
+    position: relative;
+    border-radius: 3px;
+    font-size: 11px;   /* Further reduced font-size */
+    margin: -5px 0 5px 0;
+    white-space: nowrap; /* Keeps text on one line unless it exceeds max-width */
+    background-color: #ADD8E6; /* Light Blue Background */
+    color: #000080; /* Dark Blue Text */
+    border: 1px solid #c78cb4; /* Dark Blue Border */
+}
+
+.error-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px 4px 0;
+    border-style: solid;
+    border-color: #dd5ad7 transparent transparent transparent;
+}
+/*  end of Contact Form Design */
