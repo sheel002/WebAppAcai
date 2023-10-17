@@ -45,6 +45,24 @@ li {
 	padding: 10px 20px; /* Add padding for spacing around the navigation */
 }   
 
+/* Styling Login Icon */
+.login-icon {
+    margin-right: 100px; /* Add some spacing between the title and the login icon */
+}
+
+.login-icon img {
+    width: 50px; /* Set the width of the login icon */
+}
+
+/* Styling Cart Icon */
+.cart-icon {
+    margin-right: 105px; /* Add some spacing between the title and the login icon */
+}
+
+.cart-icon img {
+    width: 50px; /* Set the width of the login icon */
+}
+
 /* Style the anchor (link) tags */
 .navbar a {
 	font-family: Lato, sans-serif; /* Replace "FontName" with your chosen font */
@@ -191,3 +209,62 @@ li {
     border-color: #dd5ad7 transparent transparent transparent;
 }
 /*  end of Contact Form Design */
+
+
+/* Login Page Design */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Style the shops section */
+.shop-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-item {
+    flex: 1; 
+    padding: 0 15px; /* This gives some spacing between the outlets */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the content horizontally */
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px; /* Add some space between the image and the content below */
+}
+
+
+.product-item h2 {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.product-item p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Shop Design*/
+
+/* Styling FAQ page */
+
+.faq-arrow img {
+    width: 50px; /* Set the width of the login icon */
+}
+
+.faq-hr {
+	border-color: #5F3361; }
