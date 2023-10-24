@@ -1,9 +1,7 @@
 <?php
-<<<<<<< HEAD
-$db = new mysqli('localhost', 'root', '', 'javajam', null, '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock');
-=======
+
 $db = new mysqli('localhost', 'root', '', 'WebAppAcai', null, '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock');
->>>>>>> 6e8afd0 (contact.php changed)
+
 $message = '';
 
 if ($db->connect_error) {
@@ -30,11 +28,7 @@ $db->close();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
-<<<<<<< HEAD
     <title>Contact Us | An Açaí Affair</title>
-=======
-    <title>Contact Us 2 | An Açaí Affair</title>
->>>>>>> 6e8afd0 (contact.php changed)
     <script>
         function validateForm() {
             var name = document.forms["contactForm"]["name"].value;
