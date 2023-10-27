@@ -104,6 +104,7 @@ li {
 .outlets-section {
     display: flex;
     justify-content: space-between;
+    background-color: #f5d6d6;
 }
 
 .outlet {
@@ -225,41 +226,6 @@ li {
     text-align: center;
 }
 
-/* Style the shops section */
-.shop-section {
-    display: flex;
-    justify-content: space-between;
-}
-
-.product-item {
-    flex: 1; 
-    padding: 0 15px; /* This gives some spacing between the outlets */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* This will center the content horizontally */
-}
-
-.product-item img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 15px; /* Add some space between the image and the content below */
-}
-
-
-.product-item h2 {
-    font-size: 20px;
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-.product-item p {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-
-/* Existing styles remain unchanged... */
 
 /* Shop Page Styles */
 .shop-content {
@@ -283,17 +249,20 @@ li {
 
 .products-display {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding-top: 20px;
+    gap: 20px; /* Adjust the gap between cards as needed */
+    justify-items: center; /* Center the items horizontally in each cell */
+    padding: 20px; /* Add padding to the container */
+    box-sizing: border-box; /* Include padding in the container width */
 }
 
 /* Example product card style */
 .product-card {
-    border: 1px solid #a2a0a0;
-    padding: 10px;
-    background-color: white;
-    transition: transform 0.3s;
+    display: grid;
+    gap: 20px; /* Adjust the gap between cards as needed */
+    justify-items: center; /* Center the items horizontally in each cell */
+    padding: 20px; /* Add padding to the container */
+    box-sizing: border-box; /* Include padding in the container width */
+
 }
 
 .product-card:hover {
@@ -301,7 +270,9 @@ li {
 }
 
 .product-card img {
-    max-width: 100%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
     border-bottom: 1px solid #a2a0a0;
     margin-bottom: 10px;
 }
@@ -313,4 +284,45 @@ li {
 
 .product-card p {
     margin: 5px 0;
+
+
 }
+
+/* End of Shop Page Styles */
+
+/* FAQ Page Styles */
+
+.faq-entry {
+    display: block;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+
+.faq-question {
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+.faq-arrow {
+    margin-left: auto;
+    font-size: 0.75em;
+    display: inline-block;
+    vertical-align: middle; /* Aligns the arrow vertically with the text */
+    
+}
+
+.faq-answer {
+    display: none;
+    margin-top: 5px;
+    margin-left: 30px;
+}
+
+ .faq-hr {
+    border-color: #D6BDC0; /* Change the color to your desired color */
+    margin-left: 30px;
+    margin-right: 50px;
+}
+
+/* FAQ Page Styles */

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    populateProducts('smoothies', 'smoothieSection');
-    populateProducts('bowls', 'bowlSection');
-});
+    populateProducts('smoothies', 'smoothiesSection');
+    populateProducts('bowls', 'bowlsSection');
+});  
 
 function populateProducts(category, sectionId) {
     const section = document.getElementById(sectionId);
@@ -10,14 +10,18 @@ function populateProducts(category, sectionId) {
     if (category === 'smoothies') {
         products = [
             {name: "Berry Blast", image: "Assets/product1.png", description: "A berry-filled delight"},
-            {name: "Tropical Twist", image: "Assets/product1.png", description: "A tropical sensation"}
-            // Add more products as needed
+            {name: "Tropical Twist", image: "Assets/product2.png", description: "A tropical sensation"},
+            {name: "Green Goodness", image: "Assets/product3.png", description: "A healthy green blend"},
+            {name: "Peanut Protein", image: "Assets/product4.png", description: "Protein-packed peanut flavor"},
+            {name: "Mango Magic", image: "Assets/product5.png", description: "Refreshing mango delight"}
         ];
     } else if (category === 'bowls') {
         products = [
-            {name: "Classic Acai Bowl", image: "Assets/product1.png", description: "The classic favorite"},
-            {name: "Peanut Butter Bliss", image: "Assets/product1.png", description: "Creamy peanut butter goodness"}
-            // Add more products as needed
+            {name: "Classic Acai Bowl", image: "Assets/bowl1.png", description: "The classic favorite"},
+            {name: "Peanut Butter Bliss", image: "Assets/bowl2.png", description: "Creamy peanut butter goodness"},
+            {name: "Tropical Bowl", image: "Assets/bowl3.png", description: "Tropical fruits and granola"},
+            {name: "Berry Bowl", image: "Assets/bowl4.png", description: "Mixed berries and chia seeds"},
+            {name: "Green Energy Bowl", image: "Assets/bowl5.png", description: "Green fruits and a sprinkle of coconut"}
         ];
     }
 
@@ -30,5 +34,6 @@ function populateProducts(category, sectionId) {
         </div>
     `).join('');
 
-    section.innerHTML = productHTML;
+    const productContainer = section.querySelector(".products-display");
+    productContainer.innerHTML = productHTML;
 }
