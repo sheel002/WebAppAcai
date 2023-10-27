@@ -258,13 +258,59 @@ li {
     margin-bottom: 10px;
 }
 
-/* Shop Design*/
 
-/* Styling FAQ page */
+/* Existing styles remain unchanged... */
 
-.faq-arrow img {
-    width: 50px; /* Set the width of the login icon */
+/* Shop Page Styles */
+.shop-content {
+    padding: 20px;
+    text-align: center;
 }
 
-.faq-hr {
-	border-color: #5F3361; }
+.product-categories button {
+    background-color: #F8E4E4;
+    border: 1px solid #a2a0a0;
+    padding: 10px 20px;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-categories button:hover {
+    background-color: #d2c0c0;
+}
+
+.products-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding-top: 20px;
+}
+
+/* Example product card style */
+.product-card {
+    border: 1px solid #a2a0a0;
+    padding: 10px;
+    background-color: white;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    max-width: 100%;
+    border-bottom: 1px solid #a2a0a0;
+    margin-bottom: 10px;
+}
+
+.product-card h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.product-card p {
+    margin: 5px 0;
+}

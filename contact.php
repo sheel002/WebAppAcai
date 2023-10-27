@@ -67,7 +67,7 @@ $db->close();
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Your Logo">
+            <img src="Assets/logo.png" alt="Your Logo">
         </div>
         <div class="navbar">
             <ul>
