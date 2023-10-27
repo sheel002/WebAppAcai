@@ -5,6 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="shop.js" defer></script>
+    <style>
+            /* Style the shops section */
+    .shop-section {
+        display: flex;
+        justify-content: space-between;
+        background-color: #f5d6d6;
+        
+    }
+
+    .product-item {
+        flex: 1; 
+        padding: 0 15px; /* This gives some spacing between the outlets */
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* This will center the content horizontally */
+    }
+
+    .product-item img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 15px; /* Add some space between the image and the content below */
+    }
+
+
+    .product-item h2 {
+        font-size: 20px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .product-item p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+
+
+    /* Shop Page Styles */
+    .shop-content {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .product-categories button {
+        background-color: #F8E4E4;
+        border: 1px solid #a2a0a0;
+        padding: 10px 20px;
+        margin: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .product-categories button:hover {
+        background-color: #d2c0c0;
+    }
+
+    .products-display {
+        display: grid;
+        gap: 20px; /* Adjust the gap between cards as needed */
+        justify-items: center; /* Center the items horizontally in each cell */
+        padding: 20px; /* Add padding to the container */
+        box-sizing: border-box; /* Include padding in the container width */
+    }
+
+    /* Example product card style */
+    .product-card {
+        display: grid;
+        gap: 20px; /* Adjust the gap between cards as needed */
+        justify-items: center; /* Center the items horizontally in each cell */
+        padding: 20px; /* Add padding to the container */
+        box-sizing: border-box; /* Include padding in the container width */
+
+    }
+
+    .product-card:hover {
+        transform: scale(1.05);
+    }
+
+    .product-card img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-bottom: 1px solid #a2a0a0;
+        margin-bottom: 10px;
+    }
+
+    .product-card h2 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .product-card p {
+        margin: 5px 0;
+    }
+    </style>
 </head>
 <body>
     <header>
