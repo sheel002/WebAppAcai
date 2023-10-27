@@ -30,10 +30,27 @@ function populateProducts(category, sectionId) {
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.description}</p>
-            <button>Add to Cart</button>
+            <button onclick="openPopup('${product.image}', '${product.name}')">Add to Cart</button>
         </div>
     `).join('');
 
     const productContainer = section.querySelector(".products-display");
     productContainer.innerHTML = productHTML;
+}
+
+
+function openPopup(imageSrc, productName) {
+    // Set the image and product name in the popup
+    const popupImage = document.querySelector('.popup-image');
+    popupImage.src = imageSrc;
+    popupImage.alt = productName;
+
+    // Display the popup
+    const popup = document.getElementById('popup');
+    popup.style.display = 'flex';
+}
+
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
 }
