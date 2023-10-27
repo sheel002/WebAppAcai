@@ -101,6 +101,29 @@
     .product-card p {
         margin: 5px 0;
     }
+
+
+    .popup-overlay {
+    display: none; /* Initially hide the overlay */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it's above other content */
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .popup-content {
+        background-color: white;
+        padding: 20px;
+        max-width: 80%;
+        overflow: auto;
+        position: relative;
+    }
     </style>
 </head>
 <body>
@@ -123,19 +146,67 @@
         <section id="smoothiesSection">
             <h2>Smoothies</h2>
             <div class="products-display">
-                <!-- Dynamic Smoothies products will be loaded here using JavaScript -->
+
+
             </div>
         </section>
 
         <section id="bowlsSection">
             <h2>Bowls</h2>
             <div class="products-display">
-                <!-- Dynamic Bowls products will be loaded here using JavaScript -->
+
             </div>
         </section>
         
         <!-- You can add more categories/sections here -->
 
     </div>
+
+    <!-- Pop-up container -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <div class="popup-left">
+                <img class="popup-image" src="" alt="Image" style="max-width: 100%;">
+            </div>
+            <div class="popup-right">
+                <h2>Size</h2>
+                <select id="typeSelect1">
+                    <option value="Option 1">Small</option>
+                    <option value="Option 2">Medium</option>
+                    <option value="Option 3">Large</option>
+                </select>
+                <h2>Choice of Drizzle</h2>
+                <select id="typeSelect2">
+                    <option value="Option A">Cookie Butter</option>
+                    <option value="Option B">Caramel Sauce</option>
+                    <option value="Option C">Almond Butter</option>
+                </select>
+                <h2>Choice of Fruits</h2>
+                <select id="typeSelect3">
+                    <option value="Choice X">Blueberries</option>
+                    <option value="Choice Y">Bananas</option>
+                    <option value="Choice Z">Strawberries</option>
+                    <option value="Choice Z">Pineapple</option>
+                </select>
+                <h2>Choice of Toppings</h2>
+                <select id="typeSelect4">
+                    <option value="Choice X">Granola</option>
+                    <option value="Choice Y">Cacao Nibs</option>
+                    <option value="Choice Z">Goji Berries</option>
+                    <option value="Choice Z">Almond Flakes</option>
+                </select>
+                <div class="quantity-control">
+                    <button class="minus" onclick="decrementQuantity(this)">-</button>
+                    <span class="quantity">1</span>
+                    <button class="plus" onclick="incrementQuantity(this)">+</button>
+                </div>
+                <div class="add-to-cart-button">
+                    <button onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
