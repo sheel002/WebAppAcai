@@ -260,3 +260,58 @@ li {
     height: auto; /* Maintain the aspect ratio */
     }
 
+
+/* Login page style */
+.login-form {
+    width: 300px;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.9); /* Semi transparent white */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-group i.fa {
+    position: absolute;
+    left: 10px;
+    top: 35px;
+    color: #777;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px 30px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* end of Login  page style */
