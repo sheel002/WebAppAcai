@@ -1,3 +1,16 @@
+<?php
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+if (isset($_SESSION['logged_in'])) {
+    echo "Logged in status: " . $_SESSION['logged_in'];
+} else {
+    echo "Logged in status: Not set";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,29 +57,7 @@
     const productContainer = section.querySelector(".products-display");
     productContainer.innerHTML = productHTML;
 
-     // cart function
-    let cart = [];
-
-    function addToCart() {
-        // Create an item object based on user's choices
-        let item = {
-            name: document.querySelector('.popup-image').alt,
-            size: document.getElementById('sizeSelect').value,
-            toppings: Array.from(document.querySelectorAll('.checkbox-list input:checked')).map(checkbox => checkbox.value)
-        };
-
-        // Add item to cart
-        cart.push(item);
-
-        // Update cart count
-        document.querySelector('.cart-count').innerText = cart.length;
-
-        // Close the popup
-        closePopup();
     }
-
-
-}
 
 
     function openPopup(imageSrc, productName) {
@@ -85,38 +76,38 @@
         popup.style.display = 'none';
     }
 
-    function checkout() {
-    if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
-    }
+    function addToCart() {
+    // Create an item object based on user's choices
+    let item = {
+        name: document.querySelector('.popup-image').alt,
+        size: document.getElementById('sizeSelect').value,
+        toppings: Array.from(document.querySelectorAll('.checkbox-list input:checked')).map(checkbox => checkbox.value)
+    };
 
-    // Convert cart to JSON string for easier handling in PHP
-    const cartData = JSON.stringify(cart);
-
-    // Send the cart data to the server
-    fetch('processOrder.php', {
+    // Send the item data to the server
+    fetch('add_to_cart.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: cartData
+        body: JSON.stringify(item)
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Order placed successfully!');
-            cart = []; // Empty the cart
-            document.querySelector('.cart-count').innerText = cart.length; // Update the cart count display
+            alert('Item added to cart successfully!');
+            // Close the popup
+            closePopup();
         } else {
-            alert('Error placing order. Please try again later.');
+            alert('Error adding item to cart. Please try again later.');
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Error placing order. Please try again later.');
+        alert('Error adding item to cart. Please try again later.');
     });
-}
+    }
+    
 
 
     </script>
@@ -363,13 +354,14 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="outlets.html">Outlets</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                <li><a href="shop.php">Shop</a></li>
                 <li><a href="faq.html">FAQ</a></li>
-                <?php if(isset($_SESSION['UserID'])): ?>
-                <li><a href="logout.php">Logout</a></li>
+                <?php 
+                if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
+                    <li><a href="login.php" class="nav-item login">Login</a></li>
+                    <li><a href="register.php" class="nav-item register">Register</a></li>
                 <?php else: ?>
-                    <li><a href="register.php">Register</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <li><a href="logout.php" class="nav-item logout">Logout</a></li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -436,7 +428,7 @@
                 </div>
     
                 <div class="add-to-cart-button">
-                    <button onclick="checkout()" class="checkout-button">Add to Cart</button>
+                    <button onclick="addToCart()" class="checkout-button">Add to Cart</button>
                 </div>
             </div>
         </div>

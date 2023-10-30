@@ -20,12 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($hashedPassword && password_verify($password, $hashedPassword)) {
         $_SESSION['UserID'] = $userID;
+        $_SESSION['logged_in'] = true;  // <-- Add this line
         header("Location: index.html");
         exit;
     } else {
         $message = "Incorrect email or password!";
     }
-    }
+}
+    
 ?>
 
 <!DOCTYPE html>

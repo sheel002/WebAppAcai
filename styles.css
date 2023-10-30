@@ -24,6 +24,8 @@ ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    gap: 20px;
 }
 
 li {
@@ -96,6 +98,7 @@ li {
 .banner-photo img {
     max-width: 100%; /* Ensure the photo doesn't exceed its container's width */
 }
+
 /* Index Design */
 
 /* Outlet Design*/
