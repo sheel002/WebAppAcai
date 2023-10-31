@@ -4,11 +4,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if (isset($_SESSION['logged_in'])) {
-    echo "Logged in status: " . $_SESSION['logged_in'];
-} else {
-    echo "Logged in status: Not set";
-}
 ?>
 
 <!DOCTYPE html>
@@ -55,12 +50,10 @@ if (isset($_SESSION['logged_in'])) {
 
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
 <body>
     <header>
         <div class="logo">
@@ -69,10 +62,10 @@ if (isset($_SESSION['logged_in'])) {
     <div class="navbar">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="outlets.html">Outlets</a></li>
+            <li><a href="outlets.php">Outlets</a></li>
             <li><a href="contact.php">Contact</a></li>
             <li><a href="shop.php">Shop</a></li>
-            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="faq.php">FAQ</a></li>
             <?php 
             if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
                 <li><a href="login.php" class="nav-item login">Login</a></li>

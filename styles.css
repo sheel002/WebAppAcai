@@ -17,7 +17,10 @@ header {
     color: white;
     padding: 10px 20px; /* Add padding for spacing above and below the navigation bar */
     text-align: center; /* Center text within the header */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
 }
+
 
 /* Reset some default styles for the list and anchor tags */
 ul {
@@ -47,43 +50,26 @@ li {
 	padding: 10px 20px; /* Add padding for spacing around the navigation */
 }   
 
-/* Styling Login Icon */
-.login-icon {
-    margin-right: 100px; /* Add some spacing between the title and the login icon */
-}
-
-.login-icon img {
-    width: 50px; /* Set the width of the login icon */
-}
-
-/* Styling Cart Icon */
-.cart-icon {
-    margin-right: 105px; /* Add some spacing between the title and the login icon */
-}
-
-.cart-icon img {
-    width: 50px; /* Set the width of the login icon */
-}
-
 /* Style the anchor (link) tags */
 .navbar a {
-	font-family: Lato, sans-serif; /* Replace "FontName" with your chosen font */
+    font-family: 'Lato', sans-serif;
     text-decoration: none;
-    color: #a2a0a0; /* Change the text color as needed */
-    text-decoration: none;
-    color: grey;
-    font-weight: bold;
+    color: #5E5E5E; /* Darker shade for better visibility */
+    font-size: 18px; /* Adjust size as needed */
+    transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
-/* Style the anchor tags when hovered over */
 .navbar a:hover {
-    color: #000000; /* Change the color when hovered over */
+    color: #333333; /* Slightly darker on hover */
+}
+.navbar a:focus {
+    outline: 2px solid #333333; /* Visible outline when focused */
 }
 
 /* Style the banner container */
 .banner {
     display: flex;
-    background-color: #f5d6d6; /* Background color for the banner */
+    background-color: #F8E4E4; /* Background color for the banner */
     color: grey;
 	padding: 50px 0; /* Add vertical padding to separate from the navigation */
 }
@@ -157,7 +143,7 @@ li {
 .contact-section {
     padding: 30px;
     text-align: center;
-    background-color: #f5d6d6; /* Updated background color */
+    background-color: #F8E4E4; /* Updated background color */
     border-radius: 10px;
 }
 
@@ -217,17 +203,54 @@ li {
 
 /* Login Page Design */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.login-box {
-    border: 1px solid #ccc;
-    padding: 20px;
+    max-width: 400px;
+    margin: 40px auto; /* Centering the box */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;
 }
+
+.login-container h2 {
+    color: #333;
+    margin-bottom: 24px;
+    font-size: 24px; /* Larger font size for heading */
+}
+
+/* Input Styles */
+input[type=text], input[type=email], input[type=password], input[type=submit] {
+    width: 80%; /* Adjust width */
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+input[type=email], input[type=password] {
+    background-color: #f7f7f7; /* Light background for inputs */
+}
+
+/* Submit Button Styling */
+input[type=submit] {
+    background-color: #007bff; /* Primary color */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #0056b3; /* Darken button on hover */
+}
+
+.message {
+    color: #dc3545; /* Error or message color */
+    margin-bottom: 20px;
+}
+
+/* End of Login screen */
 
 /* Responsive Layout for Laptops and Larger Screens */
 @media (min-width: 768px) {
