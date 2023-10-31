@@ -4,6 +4,21 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// A function to add items to the cart - you can call this when a user adds an item to the cart
+function addToCart($productName, $size, $toppings, $price) {
+    $_SESSION['cart'][] = [
+        'product' => $productName,
+        'size' => $size,
+        'toppings' => $toppings,
+        'price' => $price
+    ];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -24,19 +39,19 @@ error_reporting(E_ALL);
         let products = [];
         if (category === 'smoothies') {
             products = [
-                {name: "Pineapple Sundance Smoothie", image: "Assets/smoothie1.png", ingredients: "Pineapple, Banana, Orange Juice, Lime Zest."},
-                {name: "Berry Medley Smoothie", image: "Assets/smoothie2.png", ingredients: "Blueberries, Strawberries, Almond Milk, Chia Seeds."},
-                {name: "Golden Glow Smoothie", image: "Assets/smoothie3.png", ingredients: "Mango, Pineapple, Honey, Coconut Milk."},
-                {name: "Minty Melon Smoothie", image: "Assets/smoothie4.png", ingredients: "Watermelon, Mint Leaves, Lime Juice, Agave Syrup."},
-                {name: "Creamy Caramel Crunch Smoothie", image: "Assets/smoothie5.png", ingredients: "Dates, Cashews, Almond Milk, Caramel Syrup."}
+                {name: "Pineapple Sundance Smoothie", price: "$5.99", image: "Assets/smoothie1.png", ingredients: "Pineapple, Banana, Orange Juice, Lime Zest."},
+                {name: "Berry Medley Smoothie", price: "$6.49", image: "Assets/smoothie2.png", ingredients: "Blueberries, Strawberries, Almond Milk, Chia Seeds."},
+                {name: "Golden Glow Smoothie", price: "$6.99", image: "Assets/smoothie3.png", ingredients: "Mango, Pineapple, Honey, Coconut Milk."},
+                {name: "Minty Melon Smoothie", price: "$5.49", image: "Assets/smoothie4.png", ingredients: "Watermelon, Mint Leaves, Lime Juice, Agave Syrup."},
+                {name: "Creamy Caramel Crunch Smoothie", price: "$7.49", image: "Assets/smoothie5.png", ingredients: "Dates, Cashews, Almond Milk, Caramel Syrup."}
             ];
         } else if (category === 'bowls') {
             products = [
-                {name: "Tropical Bliss Bowl", image: "Assets/bowl1.png", ingredients: "Mango, Kiwi, Coconut Flakes, Chia Seeds."},
-                {name: "Nutty Forest Bowl", image: "Assets/bowl2.png", ingredients: "Almonds, Dark Chocolate, Granola, Honey."},
-                {name: "Citrus Splash Bowl", image: "Assets/bowl3.png", ingredients: "Oranges, Grapefruit, Goji Berries, Mint."},
-                {name: "Green Oasis Bowl", image: "Assets/bowl4.png", ingredients: "Spinach, Avocado, Hemp Seeds, Lime Zest."},
-                {name: "Ruby Indulgence Bowl", image: "Assets/bowl5.png", ingredients: "Raspberries, Strawberries, Cacao Nibs, Almond Butter."}
+                {name: "Tropical Bliss Bowl", price: "$7.99", image: "Assets/bowl1.png", ingredients: "Mango, Kiwi, Coconut Flakes, Chia Seeds."},
+                {name: "Nutty Forest Bowl", price: "$8.49", image: "Assets/bowl2.png", ingredients: "Almonds, Dark Chocolate, Granola, Honey."},
+                {name: "Citrus Splash Bowl", price: "$7.49", image: "Assets/bowl3.png", ingredients: "Oranges, Grapefruit, Goji Berries, Mint."},
+                {name: "Green Oasis Bowl", price: "$8.99", image: "Assets/bowl4.png", ingredients: "Spinach, Avocado, Hemp Seeds, Lime Zest."},
+                {name: "Ruby Indulgence Bowl", price: "$9.49", image: "Assets/bowl5.png", ingredients: "Raspberries, Strawberries, Cacao Nibs, Almond Butter."}
             ];
         }
 
@@ -45,33 +60,61 @@ error_reporting(E_ALL);
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.ingredients}</p>
-                <button onclick="openPopup('${product.image}', '${product.name}')">Add to Cart</button>
+                <p class="price">${product.price}</p>
+                <button onclick="openPopup('${product.image}', '${product.name}', '${product.price.replace("$","")}')">Add to Cart</button>
             </div>
         `).join('');
 
         const productContainer = section.querySelector(".products-display");
         productContainer.innerHTML = productHTML;
+    }
 
+
+    function openPopup(imageSrc, productName, basePrice) {
+    // Set the image and product name in the popup
+    const popupImage = document.querySelector('.popup-image');
+    popupImage.src = imageSrc;
+    popupImage.alt = productName;
+
+    // Reset selections
+    document.getElementById("sizeSelect").value = "small";
+    const toppings = document.querySelectorAll('.checkbox-list input');
+    toppings.forEach((topping) => topping.checked = false);
+
+    // Calculate and display the base price
+    updatePrice(basePrice);
+
+    // Display the popup
+    const popup = document.getElementById('popup');
+    popup.style.display = 'flex';
+}
+
+    function updatePrice(basePrice) {
+        let totalPrice = parseFloat(basePrice);
+        const size = document.getElementById("sizeSelect").value;
+        if (size === "medium") {
+            totalPrice += 2; // Assuming medium size is $2 more than small
         }
+        const toppings = document.querySelectorAll('.checkbox-list input:checked');
+        toppings.forEach((topping) => {
+            totalPrice += parseFloat(topping.getAttribute('data-price'));
+        });
 
+        document.querySelector('.popup-price').textContent = `$${totalPrice.toFixed(2)}`;
+    }
 
-        function openPopup(imageSrc, productName) {
-            // Set the image and product name in the popup
-            const popupImage = document.querySelector('.popup-image');
-            popupImage.src = imageSrc;
-            popupImage.alt = productName;
+    // Event listeners for size and toppings changes to update the price
+    document.getElementById("sizeSelect").addEventListener("change", function() {
+        const basePrice = this.getAttribute('data-base-price');
+        updatePrice(basePrice);
+    });
 
-            // Display the popup
-            const popup = document.getElementById('popup');
-            popup.style.display = 'flex';
-        }
-
-        function closePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'none';
-        }
-
-
+    document.querySelectorAll('.checkbox-list input').forEach((input) => {
+        input.addEventListener("change", function() {
+            const basePrice = document.getElementById("sizeSelect").getAttribute('data-base-price');
+            updatePrice(basePrice);
+        });
+    });
         
 
 
@@ -363,7 +406,6 @@ error_reporting(E_ALL);
                 <select id="sizeSelect">
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>
-                    <option value="large">Large</option>
                 </select>
     
                 <h2>Choice of Additional Topping <span class="optional">Optional</span></h2>
@@ -394,7 +436,7 @@ error_reporting(E_ALL);
                 <h2>Quantity</h2>
                 <input type="number" id="quantitySelect" value="1" min="1" style="width: 50px; margin-bottom: 20px;">
 
-    
+                <h2 class="popup-price"></h2>
                 <div class="add-to-cart-button">
                     <button onclick="addToCart()" class="checkout-button">Add to Cart</button>
                 </div>
