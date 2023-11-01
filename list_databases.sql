@@ -1,3 +1,12 @@
+
+CREATE TABLE Users (
+     UserID INT PRIMARY KEY AUTO_INCREMENT,
+     Name VARCHAR(255),
+     Email VARCHAR(255) UNIQUE,
+     Password VARCHAR(255),
+     Address TEXT
+ );
+ 
 CREATE TABLE user_cart (
     id INT PRIMARY KEY,
     user_id INT,

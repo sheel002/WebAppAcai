@@ -6,8 +6,15 @@ body, header {
     padding: 0;
 }
 
-body {font-family:Lato,  sans-serif;
-    background-color: #F8E4E4;
+body {
+margin: 0;
+  padding: 0;
+  font-family: Lato, sans-serif;
+  background-color: #F8E4E4;
+  background-image: url('Assets/Acai Project.png');
+  background-size: cover; /* This will ensure your image covers the whole body */
+  background-repeat: no-repeat;
+
 }
 
 header {
@@ -81,7 +88,8 @@ li {
     display: flex;
     background-color: #F8E4E4; /* Background color for the banner */
     color: grey;
-	padding: 50px 0; /* Add vertical padding to separate from the navigation */
+	padding: 10px 0; /* Add vertical padding to separate from the navigation */
+	background-color: rgba(255, 255, 255, 0.5)
 }
 
 /* Style the banner photo */

@@ -19,15 +19,15 @@ function confirmOrder() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-        if (data.status === 'success') {
-            alert('Order Confirmed! Redirecting...');
-            window.location.href = 'thank_you.php'; // Redirect or update UI
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+    console.log(data);
+    if (data.success === true) { // Updated this line
+        alert('Order Confirmed! Redirecting...');
+        window.location.href = 'thank_you.php'; // Redirect to thank you page
+    } else {
+        // If the response is not success, log the error message
+        console.error('Failed to confirm order: ' + data.message);
+    }
+})
 }
 </script>
 <body>

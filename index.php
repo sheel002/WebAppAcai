@@ -24,6 +24,7 @@ error_reporting(E_ALL);
         <div class="logo">
             <img src="Assets/logo.png" alt="Your Logo">
         </div>
+
         <div class="navbar">
             <ul>
                 <li><a href="index.php">Home</a></li>
@@ -55,8 +56,9 @@ error_reporting(E_ALL);
 <body>
     <div class="banner">
         <div class="banner-photo">
-            <img src="Assets/homepagebanner.png" alt="Your Photo">
+            <img src="Assets/banner.png" alt="Homepage Banner">
         </div>
     </div>
+</body>
 </body>
 </html>
