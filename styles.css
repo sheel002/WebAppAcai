@@ -13,6 +13,8 @@ body {font-family:Lato,  sans-serif;
 header {
     display: flex;
 	align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     background-color: #F8E4E4; /* Background color for the header */
     color: white;
     padding: 10px 20px; /* Add padding for spacing above and below the navigation bar */
@@ -57,6 +59,14 @@ li {
     color: #5E5E5E; /* Darker shade for better visibility */
     font-size: 18px; /* Adjust size as needed */
     transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.navbar ul {
+    display: flex;
+    flex-wrap: wrap; /* Ensure navbar items can wrap */
+    justify-content: center; /* Center items when they wrap */
+    gap: 10px; /* Adjust gap for a better look */
+    padding: 0; /* Reset padding */
 }
 
 .navbar a:hover {
@@ -258,6 +268,7 @@ input[type=submit]:hover {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust the column width as needed */
     }
 }
+
 
 
 .main_cart {
@@ -572,3 +583,24 @@ h2 {
     margin-top: 20px;
 }
 /* End of Pop up styl */
+
+
+.cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px; /* Adjust as per your icon */
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: smaller;
+}
+.cart-img {
+    width: 30px;  /* Adjust the width as required */
+    height: auto; /* This will keep the aspect ratio of the image */
+}

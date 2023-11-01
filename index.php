@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,22 +24,22 @@ error_reporting(E_ALL);
         <div class="logo">
             <img src="Assets/logo.png" alt="Your Logo">
         </div>
-    <div class="navbar">
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="outlets.php">Outlets</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="shop.php">Shop</a></li>
-            <li><a href="faq.php">FAQ</a></li>
-            <?php 
-            if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
-                <li><a href="login.php" class="nav-item login">Login</a></li>
-                <li><a href="register.php" class="nav-item register">Register</a></li>
-            <?php else: ?>
-                <li><a href="logout.php" class="nav-item logout">Logout</a></li>
-            <?php endif; ?>
-        </ul>
-    </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="outlets.php">Outlets</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="shop.php">Shop</a></li>
+                <li><a href="faq.php">FAQ</a></li>
+                <?php 
+                if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
+                    <li><a href="login.php" class="nav-item login">Login</a></li>
+                    <li><a href="register.php" class="nav-item register">Register</a></li>
+                <?php else: ?>
+                    <li><a href="logout.php" class="nav-item logout">Logout</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
 	</header>
 </body>
 
