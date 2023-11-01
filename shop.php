@@ -389,6 +389,12 @@ error_reporting(E_ALL);
             // Store the base price in the size select for later reference
             const sizeSelect = document.getElementById("sizeSelect");
             sizeSelect.setAttribute('data-base-price', basePrice);
+
+            //product name
+            const popupRight = document.querySelector('.popup-right');
+            popupRight.setAttribute('data-product-name', productName);  // Set product name as a data attribute
+
+
             }
 
         function updatePrice(basePrice) {
@@ -442,8 +448,9 @@ error_reporting(E_ALL);
         }
         
         // Fetch product details
-        const productName = document.querySelector('.popup-right h2').innerText;
-        const price = document.querySelector('.popup-price').innerText;
+        const productName = document.querySelector('.popup-right').getAttribute('data-product-name');
+        const priceText = document.querySelector('.popup-price').innerText;
+        const price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
         const size = document.getElementById("sizeSelect").value;
         const quantity = document.getElementById("quantitySelect").value;
         const category = document.querySelector('.popup-right h2').getAttribute('data-category');
