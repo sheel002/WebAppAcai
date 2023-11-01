@@ -53,27 +53,58 @@ function confirmOrder() {
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="shop.php">Shop</a></li>
                 <li><a href="faq.php">FAQ</a></li>
+                <li class="cart-icon">
+                <?php 
+                if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
+                    <li><a href="login.php" class="nav-item login">Login</a></li>
+                    <li><a href="register.php" class="nav-item register">Register</a></li>
+                <?php else: ?>
+                    <li><a href="logout.php" class="nav-item logout">Logout</a></li>
+                <?php endif; ?>
+                <a href="cart.php">
+                    <img src="Assets/cart-icon.png" alt="Cart" class="cart-img"> 
+                    <!-- Displaying the count of items in the cart -->
+                    <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
+                        <span class="cart-count"><?= count($_SESSION['cart']) ?></span>
+                    <?php endif; ?>
+                </a>
+                </li>
             </ul>
         </div>
     </header>
     <div class="confirm-order-box">
         <h1>Your Shopping Cart</h1>
         <?php
+        
         if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-            echo "<ul>";
+            $total = 0;
+            echo "<table>";
+            echo "<thead>";
+            echo "<tr><th>Product Name</th><th>Size</th><th>Quantity</th><th>Price</th><th>Add-Ons</th></tr>";
+            echo "</thead>";
+            echo "<tbody>";
             foreach ($_SESSION['cart'] as $item) {
-                echo "<li>";
-                echo htmlspecialchars($item['name']) . " - " . htmlspecialchars($item['size']) . " - Qty: " . htmlspecialchars($item['quantity']) . " - Price: $" . htmlspecialchars($item['price']);
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($item['name']) . "</td>";
+                echo "<td>" . htmlspecialchars($item['size']) . "</td>";
+                echo "<td>" . htmlspecialchars($item['quantity']) . "</td>";
+                echo "<td>$" . htmlspecialchars($item['price']) . "</td>";
+
+                echo "<td>";
                 if (!empty($item['addOns'])) {
-                    echo "<ul>";
                     foreach ($item['addOns'] as $addOn) {
-                        echo "<li>" . htmlspecialchars($addOn) . "</li>";
+                        echo htmlspecialchars($addOn) . "<br>";
                     }
-                    echo "</ul>";
                 }
-                echo "</li>";
+                echo "</td>";
+                echo "</tr>";
+                $total += $item['price'] * $item['quantity'];
             }
-            echo "</ul>";
+            echo "</tbody>";
+            echo "</table>";
+
+            // Display the total
+            echo "<p><strong>Total: $" . htmlspecialchars(number_format($total, 2)) . "</strong></p>";
         } else {
             echo "<p>Your cart is empty!</p>";
         }
