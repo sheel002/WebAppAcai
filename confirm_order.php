@@ -30,7 +30,9 @@ try {
     foreach ($cartItems as $item) {
         $addOnsJson = json_encode($item['addOns'] ?? []);
         $price = floatval($item['price']);
-        $stmt->bind_param("isdssiss", $userId, $item['name'], $price, $item['size'], $item['quantity'], $item['category'], $addOnsJson);
+        $quantity = intval($item['quantity']);
+        // Ensure that the types in bind_param match the types of the variables
+        $stmt->bind_param("isdssis", $userId, $item['name'], $price, $item['size'], $quantity, $item['category'], $addOnsJson);
         if (!$stmt->execute()) {
             throw new Exception("Execute failed: " . $stmt->error);
         }

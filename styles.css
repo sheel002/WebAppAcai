@@ -584,7 +584,7 @@ h2 {
 }
 /* End of Pop up styl */
 
-
+/* cart icon styling */
 .cart-icon {
     position: relative;
     display: inline-block;
@@ -604,3 +604,42 @@ h2 {
     width: 30px;  /* Adjust the width as required */
     height: auto; /* This will keep the aspect ratio of the image */
 }
+
+/* end of cart-icon styling */
+
+/* confirm-order style */
+
+.confirm-order-box {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.confirm-order-box h1 {
+    margin-bottom: 20px;
+}
+
+.confirm-order-box ul {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+}
+
+.confirm-order-box button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.confirm-order-box button:hover {
+    background-color: #45a049;
+}
+
+/* end of confirm-order style */
