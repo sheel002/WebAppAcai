@@ -83,6 +83,23 @@ li {
     outline: 2px solid #333333; /* Visible outline when focused */
 }
 
+.navbar ul {
+    list-style-type: none; /* Removes default bullet points */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+    display: flex; /* Enables flexible box layout */
+    align-items: center; /* Aligns items vertically */
+    justify-content: center; /* Centers items horizontally */
+}
+.navbar li {
+    margin-right: 20px; /* Adjust as needed for horizontal spacing */
+}
+
+.navbar li:last-child {
+    margin-right: 0; /* Removes margin from the last item */
+}
+
+
 /* Style the banner container */
 .banner {
     display: flex;
@@ -185,7 +202,7 @@ li {
 }
 
 .contact-section form input[type="submit"] {
-    background-color: #84c0c9;
+    background-color: #cc90ed;
     color: white;
     cursor: pointer;
 }
@@ -253,14 +270,14 @@ input[type=email], input[type=password] {
 
 /* Submit Button Styling */
 input[type=submit] {
-    background-color: #007bff; /* Primary color */
+    background-color: #cc90ed; /* Primary color */
     color: white;
     border: none;
     cursor: pointer;
 }
 
 input[type=submit]:hover {
-    background-color: #0056b3; /* Darken button on hover */
+    background-color: #c584e1; /* Darken button on hover */
 }
 
 .message {
@@ -268,6 +285,12 @@ input[type=submit]:hover {
     margin-bottom: 20px;
 }
 
+.register-link {
+    margin-top: 15px; /* Adjust the space above the text as needed */
+    font-size: 0.9em; /* Adjust font size as needed */
+    text-align: center; /* Centers the text */
+
+}
 /* End of Login screen */
 
 /* Responsive Layout for Laptops and Larger Screens */
@@ -682,3 +705,82 @@ h2 {
 }
 
 /* end of confirm-order style */
+
+
+
+.checkout-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.checkout-section h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.checkout-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-section label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.checkout-section input[type="text"],
+.checkout-section input[type="tel"],
+.checkout-section input[type="email"],
+.checkout-section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't add to the total width */
+}
+
+.checkout-section input::placeholder {
+    color: #999;
+}
+
+.checkout-section input[type="text"]:focus,
+.checkout-section input[type="tel"]:focus,
+.checkout-section input[type="email"]:focus,
+.checkout-section select:focus {
+    border-color: #555;
+    outline: none;
+}
+
+.checkout-section .error-tooltip {
+    display: none;
+    font-size: 0.85em;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+.checkout-section .error-tooltip.active {
+    display: block; /* Show tooltip when there is an error */
+}
+
+/* Styling for Submit Button */
+.checkout-section input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-section input[type="submit"]:hover {
+    background-color: #45a049;
+}

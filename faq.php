@@ -20,50 +20,64 @@ error_reporting(E_ALL);
             font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
+            font-weight: bold;
         }
 
     .faq-entry {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: box-shadow 0.3s ease;
-        }
+    background-color: #FFFFFF;
+    border: 1px solid #ddd;
+    padding: 3px 25px; /* Increased padding */
+    border-radius: 5px; /* Slightly larger radius */
+    margin-bottom: 5px; /* Increased spacing */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+}
 
     .faq-entry:hover {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced hover effect */
+        transform: translateY(-2px); /* Slight lift effect on hover */
     }
 
     .faq-question {
-        font-weight: bold;
-        margin-bottom: 5px;
+        font-weight: 600; /* Increased weight for readability */
+        font-size: 18px; /* Slightly larger text */
+        margin-bottom: 5px; /* Adjusted spacing */
+        display: flex; /* Added for inline arrow positioning */
+        align-items: center; /* Align arrow and text */
+        justify-content: space-between; /* Space out text and arrow */
     }
 
     .faq-arrow {
-        margin-left: 10px;
-        width: 15px;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease; /* Transition for smooth rotation */
+        transform: rotate(0); /* Default state */
     }
 
-    .faq-entry .faq-question:hover .faq-arrow {
-        transform: rotate(90deg);
+    .faq-entry.open .faq-arrow {
+        transform: rotate(90deg); /* Rotate arrow when open */
     }
 
     .faq-answer {
         display: none;
-        margin-top: 5px;
+        margin-top: 15px; /* More space above answer */
         color: #666;
-        line-height: 1.4;
+        line-height: 1.6; /* Increased line height for readability */
     }
 
     .faq-hr {
         border-color: #D6BDC0;
-        margin-top: 10px;
+        margin-top: 5px; /* More space above horizontal line */
     }
 
+    .inquiry-contact {
+    text-align: center; /* Center aligns all content inside the div */
+}
+
+.inquiry-contact p {
+    font-weight: bold; /* Makes the text inside <p> bold */
+    /* If you want the entire content of the div to be bold, including the link,
+       you can apply 'font-weight: bold;' to '.inquiry-contact' instead. */
+}
 
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,8 +124,8 @@ error_reporting(E_ALL);
 <head>
 </head>
 <body>
-<br>
-<h2>Frequently Asked Questions </h2>
+<br><br>
+<h2>Frequently Asked Questions </h2><br><br>
         
         <div class="faq-entry">
             <div class="faq-question">
@@ -172,8 +186,10 @@ error_reporting(E_ALL);
             </div>
             <hr class="faq-hr"> <!-- Horizontal line under the answer -->
         </div>
+        <div class="inquiry-contact"><br><br>
         <p>Can't find your inquiry here? Contact us <a href="contact.php">here</a>!</p>
-    <!-- Add more FAQ entries as needed -->
+        </div>
+        
 
     <script>
         // JavaScript to toggle the display of answers

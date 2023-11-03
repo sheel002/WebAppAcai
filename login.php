@@ -83,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
             <input type="submit" value="Login">
+            <p class="register-link">Already registered? <a href="register.php">Create an account</a></p>
         </form>
     </div>
 </body>

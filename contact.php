@@ -1,12 +1,13 @@
 <?php
 
-$db = new mysqli('localhost', 'root', '', 'WebAppAcai', null, '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock');
+include 'db_Connection.php';
 
-$message = '';
-
+$db = $conn;
 if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
+
+$message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['email'], $_POST['subject'], $_POST['message'])) {
     $stmt = $db->prepare('INSERT INTO contact_form (name, email, subject, message) VALUES (?, ?, ?, ?)');

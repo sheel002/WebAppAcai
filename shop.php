@@ -51,6 +51,17 @@ error_reporting(E_ALL);
         .popup-left {
             border-right: 1px solid #ccc;
         }
+
+        .checkout-button {
+        background-color: #4CAF50; /* Change this to your desired background color */
+        color: white; /* Change text color if needed */
+        padding: 10px 15px; /* Adjust padding as needed */
+        border: none; /* Removes the border */
+        border-radius: 4px; /* Adds rounded corners to your button */
+        cursor: pointer; /* Changes cursor to indicate button functionality */
+        font-size: 1em; /* Adjust the font size as needed */
+    }
+
         h2 {
             margin-top: 0;
             font-size: 20px;
