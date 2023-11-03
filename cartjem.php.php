@@ -1,4 +1,10 @@
-<!-- cart.html -->
+<?php
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,13 +17,6 @@
             font-family:Lato,  sans-serif;
             background-color: #F8E4E4;
         }
-		/* Setting background for homepage */
-    body {
-    background-image: url('Assets/background.png');
-    background-size: fill;  /* This scales the image to cover the entire viewport */
-    background-repeat: no-repeat;  /* Prevents image tiling */
-    background-attachment: fixed;  /* Keeps the background fixed while scrolling */
-    }
     </style>
 </head>
 <body>
@@ -27,21 +26,30 @@
         </div>
         <div class="navbar">
             <ul>
-                <li><a href="indexs.html">Home</a></li>
-                <li><a href="outlets.html">Outlets</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="outlets.php">Outlets</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="shop.php">Shop</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.php">FAQ</a></li>
             </ul>
         </div>
-		<div class="cart-icon">
-           <a href="cart.html"><img src="cart-icon.png" alt="Cart"></a>
-        </div>
+		<div class="main_cart">
+            <a href="cart.php"><img class="small-image" src="Assets/cart-icon.png" alt="Cart">
+           <span class="cart-count">0</span></a>
     </header>
     <body>
+	<div class="cart-section">
+	<div class="centered-content">
     <h1>Cart Summary</h1>
     <div id="cart-items"></div>
+	<div class="button-container">
     <button onclick="clearCart()">Clear Cart</button>
+	<a href="checkout.php">
+    <button>Proceed to Checkout</button>
+    </a>
+	</div>
+	</div>
+	</div>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function() {

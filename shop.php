@@ -5,20 +5,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
-
-// A function to add items to the cart - you can call this when a user adds an item to the cart
-function addToCart($productName, $size, $toppings, $price) {
-    $_SESSION['cart'][] = [
-        'product' => $productName,
-        'size' => $size,
-        'toppings' => $toppings,
-        'price' => $price
-    ];
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -27,111 +13,6 @@ function addToCart($productName, $size, $toppings, $price) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <Script>
-            document.addEventListener("DOMContentLoaded", function() {
-            populateProducts('smoothies', 'smoothiesSection');
-            populateProducts('bowls', 'bowlsSection');
-        });  
-
-    function populateProducts(category, sectionId) {
-    // Start by fetching the products data from your server
-    fetch('get_products.php?category=' + category)
-        .then(response => response.json()) 
-        .then(products => {
-            // Once the data is fetched, use it to populate the products
-            const section = document.getElementById(sectionId);
-		if (category === 'smoothies') {
-    products = [
-        { name: "Pineapple Sundance Smoothie", image: "Assets/smoothie1.png", ingredients: "Pineapple, Banana, Orange Juice, Lime Zest.", price: 5.99 },
-        { name: "Berry Medley Smoothie", image: "Assets/smoothie2.png", ingredients: "Blueberries, Strawberries, Almond Milk, Chia Seeds.", price: 6.49 },
-        { name: "Golden Glow Smoothie", image: "Assets/smoothie3.png", ingredients: "Mango, Pineapple, Honey, Coconut Milk.", price: 5.99 },
-        { name: "Minty Melon Smoothie", image: "Assets/smoothie4.png", ingredients: "Watermelon, Mint Leaves, Lime Juice, Agave Syrup.", price: 6.99 },
-        { name: "Creamy Caramel Crunch Smoothie", image: "Assets/smoothie5.png", ingredients: "Dates, Cashews, Almond Milk, Caramel Syrup.", price: 7.49 }
-    ];
-}
-
-    }
-
-            let productHTML = products.map(product => `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>${product.ingredients}</p>
-                    <p class="price">${product.price}</p>
-                    <button onclick="openPopup('${product.image}', '${product.name}', '${product.price.replace("$","")}')">Add to Cart</button>
-                </div>
-            `).join('');
-
-            const productContainer = section.querySelector(".products-display");
-            productContainer.innerHTML = productHTML;
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-            // Handle the error (show a message to the user, etc.)
-        });
-}
-
-        function openPopup(imageSrc, productName, basePrice) {
-        // Set the image and product name in the popup
-        const popupImage = document.querySelector('.popup-image');
-        popupImage.src = imageSrc;
-        popupImage.alt = productName;
-
-        // Reset selections
-        document.getElementById("sizeSelect").value = "small";
-        const toppings = document.querySelectorAll('.checkbox-list input');
-        toppings.forEach((topping) => topping.checked = false);
-
-        // Calculate and display the base price
-        updatePrice(basePrice);
-
-        // Display the popup
-        const popup = document.getElementById('popup');
-        popup.style.display = 'flex';
-
-        // Store the base price in the size select for later reference
-        const sizeSelect = document.getElementById("sizeSelect");
-        sizeSelect.setAttribute('data-base-price', basePrice);
-}
-
-    function updatePrice(basePrice) {
-        let totalPrice = parseFloat(basePrice);
-
-        // Retrieve the additional price based on size from a predefined object/array
-        const sizePrices = {"small": 0, "medium": 2}; // Example sizes with extra costs
-        const size = document.getElementById("sizeSelect").value;
-        totalPrice += sizePrices[size] || 0;
-
-        // Add the price of checked toppings
-        const toppings = document.querySelectorAll('.checkbox-list input:checked');
-        toppings.forEach((topping) => {
-            totalPrice += parseFloat(topping.getAttribute('data-price'));
-        });
-
-        document.querySelector('.popup-price').textContent = `$${totalPrice.toFixed(2)}`;
-    }
-
-    function closePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'none';
-        }
-
-    // Event listeners for size and toppings changes to update the price
-    document.getElementById("sizeSelect").addEventListener("change", function() {
-    const basePrice = this.getAttribute('data-base-price');
-    updatePrice(basePrice);
-    });
-
-    document.querySelectorAll('.checkbox-list input').forEach((input) => {
-        input.addEventListener("change", function() {
-            const basePrice = document.getElementById("sizeSelect").getAttribute('data-base-price');
-            updatePrice(basePrice);
-        });
-    });
-           
-
-
-    </script>
     <style>
     body {
             font-family: Arial, sans-serif;
@@ -170,6 +51,17 @@ function addToCart($productName, $size, $toppings, $price) {
         .popup-left {
             border-right: 1px solid #ccc;
         }
+
+        .checkout-button {
+        background-color: #4CAF50; /* Change this to your desired background color */
+        color: white; /* Change text color if needed */
+        padding: 10px 15px; /* Adjust padding as needed */
+        border: none; /* Removes the border */
+        border-radius: 4px; /* Adds rounded corners to your button */
+        cursor: pointer; /* Changes cursor to indicate button functionality */
+        font-size: 1em; /* Adjust the font size as needed */
+    }
+
         h2 {
             margin-top: 0;
             font-size: 20px;
@@ -362,7 +254,7 @@ function addToCart($productName, $size, $toppings, $price) {
             margin-top: 20px;
         }
     /* End of Pop up styl */
-	
+
     </style>
 </head>
 <body>
@@ -377,6 +269,7 @@ function addToCart($productName, $size, $toppings, $price) {
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="shop.php">Shop</a></li>
                 <li><a href="faq.php">FAQ</a></li>
+                <li class="cart-icon">
                 <?php 
                 if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
                     <li><a href="login.php" class="nav-item login">Login</a></li>
@@ -384,11 +277,15 @@ function addToCart($productName, $size, $toppings, $price) {
                 <?php else: ?>
                     <li><a href="logout.php" class="nav-item logout">Logout</a></li>
                 <?php endif; ?>
+                <a href="cart.php">
+                    <img src="Assets/cart-icon.png" alt="Cart" class="cart-img"> 
+                    <!-- Displaying the count of items in the cart -->
+                    <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
+                        <span class="cart-count"><?= count($_SESSION['cart']) ?></span>
+                    <?php endif; ?>
+                </a>
+                </li>
             </ul>
-			<div class="main_cart">
-            <a href="cart.php"><img class="small-image" src="Assets/cart-icon.png" alt="Cart">
-           <span class="cart-count">0</span></a>
-    </div>
         </div>
     </header>
 
@@ -396,7 +293,8 @@ function addToCart($productName, $size, $toppings, $price) {
         <section id="smoothiesSection">
             <h2>Smoothies</h2>
             <div class="products-display">
-			
+
+
             </div>
         </section>
 
@@ -445,4 +343,159 @@ function addToCart($productName, $size, $toppings, $price) {
     
 
 </body>
+<script>
+        var isLoggedIn = <?php echo isset($_SESSION['logged_in']) && $_SESSION['logged_in'] ? 'true' : 'false'; ?>;
+</script>
+<Script>
+            document.addEventListener("DOMContentLoaded", function() {
+            populateProducts('smoothies', 'smoothiesSection');
+            populateProducts('bowls', 'bowlsSection');
+        });  
+
+    function populateProducts(category, sectionId) {
+    // Start by fetching the products data from your server
+    fetch('get_products.php?category=' + category)
+        .then(response => response.json()) 
+        .then(products => {
+            // Once the data is fetched, use it to populate the products
+            const section = document.getElementById(sectionId);
+
+            let productHTML = products.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.ingredients}</p>
+                    <p class="price">${product.price}</p>
+                    <button onclick="openPopup('${product.image}', '${product.name}', '${product.price.replace("$","")}')">Add to Cart</button>
+                </div>
+            `).join('');
+
+            const productContainer = section.querySelector(".products-display");
+            productContainer.innerHTML = productHTML;
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+            // Handle the error (show a message to the user, etc.)
+        });
+}
+
+        function openPopup(imageSrc, productName, basePrice) {
+            // Set the image and product name in the popup
+            const popupImage = document.querySelector('.popup-image');
+            popupImage.src = imageSrc;
+            popupImage.alt = productName;
+
+            // Reset selections
+            document.getElementById("sizeSelect").value = "small";
+            const toppings = document.querySelectorAll('.checkbox-list input');
+            toppings.forEach((topping) => topping.checked = false);
+
+            // Calculate and display the base price
+            updatePrice(basePrice);
+
+            // Display the popup
+            const popup = document.getElementById('popup');
+            popup.style.display = 'flex';
+
+            // Store the base price in the size select for later reference
+            const sizeSelect = document.getElementById("sizeSelect");
+            sizeSelect.setAttribute('data-base-price', basePrice);
+
+            //product name
+            const popupRight = document.querySelector('.popup-right');
+            popupRight.setAttribute('data-product-name', productName);  // Set product name as a data attribute
+
+
+            }
+
+        function updatePrice(basePrice) {
+            let totalPrice = parseFloat(basePrice);
+
+            // Additional price based on size
+            const sizePrices = {"small": 0, "medium": 2}; // Example sizes with extra costs
+            const size = document.getElementById("sizeSelect").value;
+            totalPrice += sizePrices[size] || 0;
+
+            // Add price of checked toppings
+            const toppings = document.querySelectorAll('.checkbox-list input:checked');
+            toppings.forEach((topping) => {
+                totalPrice += parseFloat(topping.getAttribute('data-price'));
+            });
+
+            // Consider quantity
+            const quantity = parseInt(document.getElementById("quantitySelect").value) || 1;
+            totalPrice *= quantity;
+
+            document.querySelector('.popup-price').textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+
+        function closePopup() {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'none';
+            }
+
+        document.getElementById("quantitySelect").addEventListener("input", function() {
+        const basePrice = document.getElementById("sizeSelect").getAttribute('data-base-price');
+        updatePrice(basePrice);
+        });
+
+        document.querySelectorAll('.checkbox-list input').forEach((input) => {
+            input.addEventListener("change", function() {
+                const basePrice = document.getElementById("sizeSelect").getAttribute('data-base-price');
+                updatePrice(basePrice);
+            });
+        });
+
+        document.getElementById("sizeSelect").addEventListener("change", function() {
+            const basePrice = this.getAttribute('data-base-price');
+            updatePrice(basePrice);
+        });
+                
+        function addToCart() {
+            if (!isLoggedIn) {
+            alert("Please login first!");
+            return;
+        }
+        
+        // Fetch product details
+        const productName = document.querySelector('.popup-right').getAttribute('data-product-name');
+        const priceText = document.querySelector('.popup-price').innerText;
+        const price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+        const size = document.getElementById("sizeSelect").value;
+        const quantity = document.getElementById("quantitySelect").value;
+        const category = document.querySelector('.popup-right h2').getAttribute('data-category');
+
+        // Fetch add-ons
+        let addOns = [];
+        document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked').forEach((checkbox) => {
+            addOns.push(checkbox.value);
+        });
+
+        // Send this data to a PHP script on the server
+        fetch('add_to_cart.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: productName,
+                price: price,
+                size: size,
+                quantity: quantity,
+                category: category,
+                addOns: addOns
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Optionally redirect to the cart page or update a cart icon counter here
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        }
+
+    </script>
 </html>

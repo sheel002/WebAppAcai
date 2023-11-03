@@ -1,30 +1,23 @@
 <?php
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
+// Clear the cart after the order is confirmed
+$_SESSION['cart'] = [];
 
 ?>
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-<meta charset="utf-8">
-    <style>
-    body {font-family:Lato,  sans-serif;
-        background-color: #F8E4E4;
-    }
-    </style>
+    <title>Thank You</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
 <header>
         <div class="logo">
             <img src="Assets/logo.png" alt="Your Logo">
         </div>
-
         <div class="navbar">
             <ul>
                 <li><a href="index.php">Home</a></li>
@@ -50,15 +43,15 @@ error_reporting(E_ALL);
                 </li>
             </ul>
         </div>
-    </header>
-</body>
-
+  </header>
 <body>
-    <div class="banner">
-        <div class="banner-photo">
-            <img src="Assets/banner.png" alt="Homepage Banner">
-        </div>
-    </div>
-</body>
+    <h1>Thank You for Your Order!</h1>
+    <p>Your order has been successfully placed and is being processed.</p>
+
+    <!-- You can provide additional information here like estimated delivery time, order number, etc. -->
+
+    <a href="index.php">Continue Shopping</a> <!-- Link back to the main shopping page or user dashboard -->
+
+    <!-- You can also add more content such as recommendations, links to track the order, customer service contact info, etc. -->
 </body>
 </html>

@@ -6,24 +6,38 @@ body, header {
     padding: 0;
 }
 
-body {font-family:Lato,  sans-serif;
-    background-color: #F8E4E4;
+body {
+margin: 0;
+  padding: 0;
+  font-family: Lato, sans-serif;
+  background-color: #F8E4E4;
+  background-image: url('Assets/Acai Project.png');
+  background-size: cover; /* This will ensure your image covers the whole body */
+  background-repeat: no-repeat;
+
 }
 
 header {
     display: flex;
 	align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     background-color: #F8E4E4; /* Background color for the header */
     color: white;
     padding: 10px 20px; /* Add padding for spacing above and below the navigation bar */
     text-align: center; /* Center text within the header */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
 }
+
 
 /* Reset some default styles for the list and anchor tags */
 ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    gap: 20px;
 }
 
 li {
@@ -45,45 +59,54 @@ li {
 	padding: 10px 20px; /* Add padding for spacing around the navigation */
 }   
 
-/* Styling Login Icon */
-.login-icon {
-    margin-right: 100px; /* Add some spacing between the title and the login icon */
-}
-
-.login-icon img {
-    width: 50px; /* Set the width of the login icon */
-}
-
-/* Styling Cart Icon */
-.cart-icon {
-    margin-right: 105px; /* Add some spacing between the title and the login icon */
-}
-
-.cart-icon img {
-    width: 50px; /* Set the width of the login icon */
-}
-
 /* Style the anchor (link) tags */
 .navbar a {
-	font-family: Lato, sans-serif; /* Replace "FontName" with your chosen font */
+    font-family: 'Lato', sans-serif;
     text-decoration: none;
-    color: #a2a0a0; /* Change the text color as needed */
-    text-decoration: none;
-    color: grey;
-    font-weight: bold;
+    color: #5E5E5E; /* Darker shade for better visibility */
+    font-size: 18px; /* Adjust size as needed */
+    transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
-/* Style the anchor tags when hovered over */
-.navbar a:hover {
-    color: #000000; /* Change the color when hovered over */
+.navbar ul {
+    display: flex;
+    flex-wrap: wrap; /* Ensure navbar items can wrap */
+    justify-content: center; /* Center items when they wrap */
+    gap: 10px; /* Adjust gap for a better look */
+    padding: 0; /* Reset padding */
 }
+
+.navbar a:hover {
+    color: #333333; /* Slightly darker on hover */
+}
+.navbar a:focus {
+    outline: 2px solid #333333; /* Visible outline when focused */
+}
+
+.navbar ul {
+    list-style-type: none; /* Removes default bullet points */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+    display: flex; /* Enables flexible box layout */
+    align-items: center; /* Aligns items vertically */
+    justify-content: center; /* Centers items horizontally */
+}
+.navbar li {
+    margin-right: 20px; /* Adjust as needed for horizontal spacing */
+}
+
+.navbar li:last-child {
+    margin-right: 0; /* Removes margin from the last item */
+}
+
 
 /* Style the banner container */
 .banner {
     display: flex;
-    background-color: #f5d6d6; /* Background color for the banner */
+    background-color: #F8E4E4; /* Background color for the banner */
     color: grey;
-	padding: 50px 0; /* Add vertical padding to separate from the navigation */
+	padding: 10px 0; /* Add vertical padding to separate from the navigation */
+	background-color: rgba(255, 255, 255, 0.5)
 }
 
 /* Style the banner photo */
@@ -96,6 +119,7 @@ li {
 .banner-photo img {
     max-width: 100%; /* Ensure the photo doesn't exceed its container's width */
 }
+
 /* Index Design */
 
 /* Outlet Design*/
@@ -104,6 +128,7 @@ li {
 .outlets-section {
     display: flex;
     justify-content: space-between;
+    
 }
 
 .outlet {
@@ -153,7 +178,7 @@ li {
 .contact-section {
     padding: 30px;
     text-align: center;
-    background-color: #f5d6d6; /* Updated background color */
+    background-color: #F8E4E4; /* Updated background color */
     border-radius: 10px;
 }
 
@@ -177,7 +202,7 @@ li {
 }
 
 .contact-section form input[type="submit"] {
-    background-color: #84c0c9;
+    background-color: #cc90ed;
     color: white;
     cursor: pointer;
 }
@@ -213,22 +238,227 @@ li {
 
 /* Login Page Design */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.login-box {
-    border: 1px solid #ccc;
-    padding: 20px;
+    max-width: 400px;
+    margin: 40px auto; /* Centering the box */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;
 }
 
-/* Style the shops section */
-.shop-section {
+.login-container h2 {
+    color: #333;
+    margin-bottom: 24px;
+    font-size: 24px; /* Larger font size for heading */
+}
+
+/* Input Styles */
+input[type=text], input[type=email], input[type=password], input[type=submit] {
+    width: 80%; /* Adjust width */
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+input[type=email], input[type=password] {
+    background-color: #f7f7f7; /* Light background for inputs */
+}
+
+/* Submit Button Styling */
+input[type=submit] {
+    background-color: #cc90ed; /* Primary color */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #c584e1; /* Darken button on hover */
+}
+
+.message {
+    color: #dc3545; /* Error or message color */
+    margin-bottom: 20px;
+}
+
+.register-link {
+    margin-top: 15px; /* Adjust the space above the text as needed */
+    font-size: 0.9em; /* Adjust font size as needed */
+    text-align: center; /* Centers the text */
+
+}
+/* End of Login screen */
+
+/* Responsive Layout for Laptops and Larger Screens */
+@media (min-width: 768px) {
+    .products-display {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust the column width as needed */
+    }
+}
+
+
+
+.main_cart {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.main_cart {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.small-image {
+    width: 40px; /* Set the desired width */
+
+    height: auto; /* Maintain the aspect ratio */
+    }
+
+
+/* Login page style */
+.login-form {
+    width: 300px;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.9); /* Semi transparent white */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-group i.fa {
+    position: absolute;
+    left: 10px;
+    top: 35px;
+    color: #777;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px 30px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* end of Login  page style */
+
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.popup-content {
+    background-color: #fff;
+    width: 70%;
+    max-width: 600px;
+    display: flex;
+    padding: 20px;
+    border-radius: 10px;
+}
+.popup-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.popup-left, .popup-right {
+    flex: 1;
+    padding: 10px;
+}
+.popup-left {
+    border-right: 1px solid #ccc;
+}
+h2 {
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.add-to-cart-button {
+    margin-top: 20px;
+}
+button {
+padding: 12px 20px; /* Increased padding */
+background-color: #333;
+color: #fff;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.3s; /* Added transform transition */
+border-radius: 5px; /* Rounded corners for the button */
+}
+
+button:hover {
+    background-color: #555;
+    transform: translateY(-2px); /* Button will move up slightly on hover */
+}
+    /* Style the shops section */
+
+.shop-section h2 {
+font-size: 28px;          /* Increase font size */
+font-weight: bold;        /* Make the text bold */
+color: #2d2d2d;           /* A dark color for contrast */
+margin-bottom: 20px;      /* Add spacing below the heading */
+text-transform: uppercase; /* Convert text to uppercase */
+padding-bottom: 10px;     /* Padding at the bottom for our border */
+border-bottom: 2px solid #a2a0a0;  /* A border at the bottom */
 }
 
 .product-item {
@@ -258,13 +488,299 @@ li {
     margin-bottom: 10px;
 }
 
-/* Shop Design*/
 
-/* Styling FAQ page */
 
-.faq-arrow img {
-    width: 50px; /* Set the width of the login icon */
+/* Shop Page Styles */
+.shop-content {
+    padding: 20px;
+    text-align: center;
 }
 
-.faq-hr {
-	border-color: #5F3361; }
+.product-categories button {
+    background-color: #F8E4E4;
+    border: 1px solid #a2a0a0;
+    padding: 10px 20px;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-categories button:hover {
+    background-color: #d2c0c0;
+}
+
+.products-display {
+    display: grid;
+    gap: 20px; /* Adjust the gap between cards as needed */
+    justify-items: center; /* Center the items horizontally in each cell */
+    padding: 20px; /* Add padding to the container */
+    box-sizing: border-box; /* Include padding in the container width */
+}
+
+/* end of Shop Page Styles */
+/*  product card style */
+.product-card {
+display: grid;
+gap: 20px;
+justify-items: center;
+padding: 30px; /* Increased padding */
+box-sizing: border-box;
+background-color: #ffffff; /* White background */
+border-radius: 10px; /* Rounded corners */
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+transition: transform 0.3s; /* Added transition for smooth effect */
+}
+
+
+.product-card:hover {
+transform: scale(1.03); /* Reduced the scale for subtleness */
+ }
+
+
+.product-card img {
+width: 160px; /* Increased image size */
+height: 160px;
+object-fit: cover;
+border-bottom: 1px solid #a2a0a0;
+margin-bottom: 15px; /* Increased spacing */
+border-radius: 10px; /* Rounded corners for the image */
+}
+
+.product-card h2 {
+margin: 0;
+padding: 0;
+font-size: 22px; /* Increased font size */
+}
+
+.product-card p {
+margin: 10px 0; /* Adjusted margin */
+font-size: 17px; /* Increased font size */
+}
+/*  end of product card style */
+
+/* Pop up styl */
+.popup-overlay {
+display: none; /* Initially hide the overlay */
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+z-index: 1000; /* Ensure it's above other content */
+overflow: hidden;
+align-items: center;
+justify-content: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    max-width: 80%;
+    overflow: auto;
+    position: relative;
+}
+
+.popup-close {
+    cursor: pointer;
+}
+.popup-right {
+    padding: 20px;
+}
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.optional {
+    font-size: 14px;
+    color: gray;
+    margin-left: 10px;
+}
+.checkbox-list label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+.checkbox-list input {
+    margin-right: 10px;
+}
+.price {
+    color: red;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.add-to-cart-button {
+    margin-top: 20px;
+}
+/* End of Pop up styl */
+
+/* cart icon styling */
+.cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px; /* Adjust as per your icon */
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: smaller;
+}
+.cart-img {
+    width: 30px;  /* Adjust the width as required */
+    height: auto; /* This will keep the aspect ratio of the image */
+}
+
+/* end of cart-icon styling */
+
+/* confirm-order style */
+.confirm-order-box {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.confirm-order-box h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.confirm-order-box table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.confirm-order-box th, 
+.confirm-order-box td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.confirm-order-box th {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.confirm-order-box tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.confirm-order-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.confirm-order-box ul li {
+    padding: 2px 0;
+}
+
+.confirm-order-box button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.confirm-order-box button:hover {
+    background-color: #45a049;
+}
+
+/* end of confirm-order style */
+
+
+
+.checkout-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.checkout-section h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.checkout-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-section label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.checkout-section input[type="text"],
+.checkout-section input[type="tel"],
+.checkout-section input[type="email"],
+.checkout-section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't add to the total width */
+}
+
+.checkout-section input::placeholder {
+    color: #999;
+}
+
+.checkout-section input[type="text"]:focus,
+.checkout-section input[type="tel"]:focus,
+.checkout-section input[type="email"]:focus,
+.checkout-section select:focus {
+    border-color: #555;
+    outline: none;
+}
+
+.checkout-section .error-tooltip {
+    display: none;
+    font-size: 0.85em;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+.checkout-section .error-tooltip.active {
+    display: block; /* Show tooltip when there is an error */
+}
+
+/* Styling for Submit Button */
+.checkout-section input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-section input[type="submit"]:hover {
+    background-color: #45a049;
+}
