@@ -706,7 +706,7 @@ h2 {
 
 /* end of confirm-order style */
 
-
+/* checkout style */
 
 .checkout-section {
     max-width: 600px;
@@ -770,7 +770,7 @@ h2 {
     display: block; /* Show tooltip when there is an error */
 }
 
-/* Styling for Submit Button */
+/* Styling for Submit Button/ cart.php */
 .checkout-section input[type="submit"] {
     background-color: #4CAF50;
     color: white;
@@ -784,3 +784,7 @@ h2 {
 .checkout-section input[type="submit"]:hover {
     background-color: #45a049;
 }
+ 
+/* end of checkout style/ cart.php */
+
+/* Styling for register page */
