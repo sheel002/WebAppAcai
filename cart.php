@@ -224,7 +224,7 @@ session_start();
 
 
 
-        <button onclick="confirmOrder()">Confirm Order</button>
+        <button onclick="confirmOrder()">Proceed to Checkout</button>
         <?php else: ?>
             
         <?php endif; ?>

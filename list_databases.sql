@@ -1,40 +1,45 @@
 
-CREATE TABLE Users (
-     UserID INT PRIMARY KEY AUTO_INCREMENT,
-     Name VARCHAR(255),
-     Email VARCHAR(255) UNIQUE,
-     Password VARCHAR(255),
-     Address TEXT
- );
-
-CREATE TABLE ContactForm (
-    id INT PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    subject VARCHAR(255),
-    message TEXT
+CREATE TABLE users (
+    UserID int(11) NOT NULL AUTO_INCREMENT,
+    Name varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    Email varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    Password varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    Address text COLLATE utf8mb4_general_ci,
+    PRIMARY KEY (UserID)
 );
+
+CREATE TABLE contact_form (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+    email VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+    subject VARCHAR(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    message TEXT COLLATE utf8mb4_general_ci NOT NULL
+);
+
  
 CREATE TABLE user_cart (
-    id INT PRIMARY KEY,
-    user_id INT,
-    product_name VARCHAR(255),
-    product_price DECIMAL(10, 2),
-    size VARCHAR(50),
-    quantity INT,
-    category VARCHAR(255),
-    add_ons VARCHAR(255),
-    created_at TIMESTAMP
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) NULL,
+    product_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+    product_price DECIMAL(10,2) NULL,
+    size VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+    quantity INT(11) NULL,
+    category VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+    add_ons TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE products (
-    id INT PRIMARY KEY,
-    name VARCHAR(255),
-    price DECIMAL(10, 2),
-    category VARCHAR(255),
-    image VARCHAR(255),
-    ingredients TEXT
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    category VARCHAR(50) DEFAULT NULL,
+    image VARCHAR(255) DEFAULT NULL,
+    ingredients TEXT DEFAULT NULL,
+    inventory INT(11) DEFAULT NULL
 );
+
+
 
 INSERT INTO products (id, name, price, category, image, ingredients)
 VALUES 
@@ -52,3 +57,4 @@ VALUES
 
 
 UPDATE products SET inventory = 10;
+
