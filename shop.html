@@ -1,390 +1,433 @@
+<?php //catalog.php
+session_start();
+if (!isset($_SESSION['cart'])){
+	$_SESSION['cart'] = array();
+}
+if (isset($_GET['buy'])) {
+	$_SESSION['cart'][] = $_GET['buy'];
+	header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
+	exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <style>
-        body {
-            font-family: Lato, sans-serif;
-            background-color: #F8E4E4;
-        }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<html>
-<head>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <Script>
+        document.addEventListener("DOMContentLoaded", function() {
+        populateProducts('smoothies', 'smoothiesSection');
+        populateProducts('bowls', 'bowlsSection');
+    });  
+
+    function populateProducts(category, sectionId) {
+    const section = document.getElementById(sectionId);
+
+    let products = [];
+    if (category === 'smoothies') {
+        products = [
+            {name: "Pineapple Sundance Smoothie", image: "Assets/smoothie1.png", ingredients: "Pineapple, Banana, Orange Juice, Lime Zest."},
+            {name: "Berry Medley Smoothie", image: "Assets/smoothie2.png", ingredients: "Blueberries, Strawberries, Almond Milk, Chia Seeds."},
+            {name: "Golden Glow Smoothie", image: "Assets/smoothie3.png", ingredients: "Mango, Pineapple, Honey, Coconut Milk."},
+            {name: "Minty Melon Smoothie", image: "Assets/smoothie4.png", ingredients: "Watermelon, Mint Leaves, Lime Juice, Agave Syrup."},
+            {name: "Creamy Caramel Crunch Smoothie", image: "Assets/smoothie5.png", ingredients: "Dates, Cashews, Almond Milk, Caramel Syrup."}
+        ];
+    } else if (category === 'bowls') {
+        products = [
+            {name: "Tropical Bliss Bowl", image: "Assets/bowl1.png", ingredients: "Mango, Kiwi, Coconut Flakes, Chia Seeds."},
+            {name: "Nutty Forest Bowl", image: "Assets/bowl2.png", ingredients: "Almonds, Dark Chocolate, Granola, Honey."},
+            {name: "Citrus Splash Bowl", image: "Assets/bowl3.png", ingredients: "Oranges, Grapefruit, Goji Berries, Mint."},
+            {name: "Green Oasis Bowl", image: "Assets/bowl4.png", ingredients: "Spinach, Avocado, Hemp Seeds, Lime Zest."},
+            {name: "Ruby Indulgence Bowl", image: "Assets/bowl5.png", ingredients: "Raspberries, Strawberries, Cacao Nibs, Almond Butter."}
+        ];
+    }
+
+    let productHTML = products.map(product => `
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.ingredients}</p>
+            <button onclick="openPopup('${product.image}', '${product.name}')">Add to Cart</button>
+        </div>
+    `).join('');
+
+    const productContainer = section.querySelector(".products-display");
+    productContainer.innerHTML = productHTML;
+
+     // cart function
+    let cart = [];
+
+    function addToCart() {
+        // Create an item object based on user's choices
+        let item = {
+            name: document.querySelector('.popup-image').alt,
+            size: document.getElementById('sizeSelect').value,
+            toppings: Array.from(document.querySelectorAll('.checkbox-list input:checked')).map(checkbox => checkbox.value)
+        };
+
+        // Add item to cart
+        cart.push(item);
+
+        // Update cart count
+        document.querySelector('.cart-count').innerText = cart.length;
+
+        // Close the popup
+        closePopup();
+    }
+
+
+}
+
+
+    function openPopup(imageSrc, productName) {
+        // Set the image and product name in the popup
+        const popupImage = document.querySelector('.popup-image');
+        popupImage.src = imageSrc;
+        popupImage.alt = productName;
+
+        // Display the popup
+        const popup = document.getElementById('popup');
+        popup.style.display = 'flex';
+    }
+
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'none';
+    }
+
+    function checkout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    </script>
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background-color: #fff;
+            width: 70%;
+            max-width: 600px;
+            display: flex;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .popup-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .popup-left, .popup-right {
+            flex: 1;
+            padding: 10px;
+        }
+        .popup-left {
+            border-right: 1px solid #ccc;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-button {
+            margin-top: 20px;
+        }
+        button {
+        padding: 12px 20px; /* Increased padding */
+        background-color: #333;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s; /* Added transform transition */
+        border-radius: 5px; /* Rounded corners for the button */
+        }
+
+        button:hover {
+            background-color: #555;
+            transform: translateY(-2px); /* Button will move up slightly on hover */
+        }
+            /* Style the shops section */
+
+        .shop-section h2 {
+        font-size: 28px;          /* Increase font size */
+        font-weight: bold;        /* Make the text bold */
+        color: #2d2d2d;           /* A dark color for contrast */
+        margin-bottom: 20px;      /* Add spacing below the heading */
+        text-transform: uppercase; /* Convert text to uppercase */
+        padding-bottom: 10px;     /* Padding at the bottom for our border */
+        border-bottom: 2px solid #a2a0a0;  /* A border at the bottom */
+        }
+
+        .product-item {
+            flex: 1; 
+            padding: 0 15px; /* This gives some spacing between the outlets */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* This will center the content horizontally */
+        }
+
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px; /* Add some space between the image and the content below */
+        }
+
+
+        .product-item h2 {
+            font-size: 20px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .product-item p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+
+
+        /* Shop Page Styles */
+        .shop-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-categories button {
+            background-color: #F8E4E4;
+            border: 1px solid #a2a0a0;
+            padding: 10px 20px;
+            margin: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product-categories button:hover {
+            background-color: #d2c0c0;
+        }
+
+        .products-display {
+            display: grid;
+            gap: 20px; /* Adjust the gap between cards as needed */
+            justify-items: center; /* Center the items horizontally in each cell */
+            padding: 20px; /* Add padding to the container */
+            box-sizing: border-box; /* Include padding in the container width */
+        }
+
+        /* end of Shop Page Styles */
+        /*  product card style */
+        .product-card {
+        display: grid;
+        gap: 20px;
+        justify-items: center;
+        padding: 30px; /* Increased padding */
+        box-sizing: border-box;
+        background-color: #ffffff; /* White background */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: transform 0.3s; /* Added transition for smooth effect */
+    }
+
+
+        .product-card:hover {
+        transform: scale(1.03); /* Reduced the scale for subtleness */
+         }
+
+
+        .product-card img {
+        width: 160px; /* Increased image size */
+        height: 160px;
+        object-fit: cover;
+        border-bottom: 1px solid #a2a0a0;
+        margin-bottom: 15px; /* Increased spacing */
+        border-radius: 10px; /* Rounded corners for the image */
+        }
+
+        .product-card h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 22px; /* Increased font size */
+        }
+
+        .product-card p {
+        margin: 10px 0; /* Adjusted margin */
+        font-size: 17px; /* Increased font size */
+    }
+        /*  end of product card style */
+        
+    /* Pop up styl */
+        .popup-overlay {
+        display: none; /* Initially hide the overlay */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        z-index: 1000; /* Ensure it's above other content */
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            max-width: 80%;
+            overflow: auto;
+            position: relative;
+        }
+
+        .popup-close {
+            cursor: pointer;
+        }
+        .popup-right {
+            padding: 20px;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .optional {
+            font-size: 14px;
+            color: gray;
+            margin-left: 10px;
+        }
+        .checkbox-list label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        .checkbox-list input {
+            margin-right: 10px;
+        }
+        .price {
+            color: red;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .add-to-cart-button {
+            margin-top: 20px;
+        }
+    /* End of Pop up styl */
+
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Your Logo">
+            <img src="Assets/logo.png" alt="Your Logo">
         </div>
         <div class="navbar">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="outlets.html">Outlets</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="faq.html">FAQ</a></li>
+                <?php if(isset($_SESSION['UserID'])): ?>
+                <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="register.php">Register</a></li>
+                    <li><a href="login.php">Login</a></li>
+                <?php endif; ?>
             </ul>
-        </div>
-        <div class="cart-icon">
-            <a href="cart.html"><img src="cart-icon.png" alt="Cart"></a>
-        </div>
-        <div class="login-icon">
-            <a href="login.html"><img src="login-icon.png" alt="Login"></a>
+			<a href="cart.html">
+            <img src="cart-icon.png" alt="Cart Icon" class="cart-icon">
+            </a>
         </div>
     </header>
-</body>
-<head>
-    <style>
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
+    <div class="shop-content">
+        <section id="smoothiesSection">
+            <h2>Smoothies</h2>
+            <div class="products-display">
 
-        .product-item {
-            width: calc(25% - 35px); /* 20px is the total margin and padding for each item */
-            margin: 5px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-	
-    /* Style for the overlay */
-    .popup-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
 
-    /* Style for the popup content */
-    .popup-content {
-      display: flex; /* Use flexbox for layout */
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      z-index: 2;
-      max-width: 80%; /* Limit the width of the popup */
-    }
-
-    /* Left side for image (60% width) */
-    .popup-left {
-      flex: 2; /* Occupy 60% of the popup width */
-    }
-
-    /* Right side for select forms (40% width) */
-    .popup-right {
-      flex: 1.5; /* Occupy 40% of the popup width */
-	  text-align: left;
-	  padding-right: 15px;
-    }
-
-    /* Close button style */
-    .popup-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-    }
-	
-	 /* Style for the "Add to Cart" button */
-    .add-to-cart-button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px; /* Adjust the top margin as needed */
-	  
-    }
-	
-	.quantity-control {
-            display: flex;
-			padding-top: 20px;
-            align-items: center; /* Center align elements vertically */
-            justify-content: space-between; /* Add space between buttons and select boxes */
-        }
-
-        .quantity-buttons {
-            display: flex;
-            align-items: center; /* Center align the plus and minus buttons */
-        }
-
-        .quantity-buttons button {
-            align-items: center;
-			margin: 0 5px; /* Add spacing around buttons */
-			margin: 0; /* Remove any default margin */
-}
-        }
-		
-		.quantity span {
-            margin: 0 5px; /* Adjust the margin to control spacing */
-        }
-		
-		.popup-image {
-        margin-left: -40px; /* Adjust the value as needed to move the image to the left */
-        }
-
-    </style>
-</head>
-<body>
-    <div class="shop-section">
-        <div class="product-item">
-            <img src="product1.png" alt="Open Popup" onclick="openPopup()" style="cursor: pointer;">
-            <h2>Classic Acai</h2>
-            <p>Acai and coconut base, with Greek yoghurt toppings</p>
-			<div class="popup-overlay" id="popup">
-              <div class="popup-content">
-              <span class="popup-close" onclick="closePopup()">&times;</span>
-              <div class="popup-left">
-              <img class="popup-image" img src="product1.png" alt="Image" style="max-width: 100%;">
             </div>
-            <div class="popup-right">
-            <h2>Size</h2>
-            <select id="typeSelect1">
-            <option value="Option 1">Small</option>
-            <option value="Option 2">Medium</option>
-            <option value="Option 3">Large</option>
-            </select>
-            <h2>Choice of Drizzle</h2>
-            <select id="typeSelect2">
-            <option value="Option A">Cookie Butter</option>
-            <option value="Option B">Caramel Sauce</option>
-            <option value="Option C">Almond Butter</option>
-            </select>
-            <h2>Choice of Fruits</h2>
-            <select id="typeSelect3">
-            <option value="Choice X">Blueberries</option>
-            <option value="Choice Y">Bananas</option>
-            <option value="Choice Z">Strawberries</option>
-			<option value="Choice Z">Pineapple</option>
-            </select>
-			<h2>Choice of Toppings</h2>
-            <select id="typeSelect4">
-            <option value="Choice X">Granola</option>
-            <option value="Choice Y">Cacao Nibs</option>
-            <option value="Choice Z">Goji Berries</option>
-			<option value="Choice Z">Almond Flakes</option>
-            </select>
-			<div class="quantity-control">
-                <button class="minus" onclick="decrementQuantity(this)">-</button>
-                <span class="quantity">1</span>
-                <button class="plus" onclick="incrementQuantity(this)">+</button>
-            </div>
-			<div class="add-to-cart-button">
-            <button onclick="addToCart()">Add to Cart</button>
-            </div>
-            </div>
-          </div>
-       </div>
-     </div>
+        </section>
 
-        <div class="product-item">
-            <img src="product2.png" alt="Open Popup" onclick="openPopup()" style="cursor: pointer;">
-            <h2>Berrylicious</h2>
-            <p>Acai with chia seeds base, Granola and strawberry toppings</p>
-			<div class="popup-overlay" id="popup">
-              <div class="popup-content">
-              <span class="popup-close" onclick="closePopup()">&times;</span>
-              <div class="popup-left">
-              <img class="popup-image" img src="product2.png" alt="Image" style="max-width: 100%;">
+        <section id="bowlsSection">
+            <h2>Bowls</h2>
+            <div class="products-display">
+
             </div>
-            <div class="popup-right">
-            <h2>Size</h2>
-            <select id="typeSelect">
-            <option value="Option 1">Small</option>
-            <option value="Option 2">Medium</option>
-            <option value="Option 3">Large</option>
-            </select>
-            <h2>Choice of Drizzle</h2>
-            <select id="typeSelect2">
-            <option value="Option A">Cookie Butter</option>
-            <option value="Option B">Caramel Sauce</option>
-            <option value="Option C">Almond Butter</option>
-            </select>
-            <h2>Choice of Fruits</h2>
-            <select id="typeSelect3">
-            <option value="Choice X">Blueberries</option>
-            <option value="Choice Y">Bananas</option>
-            <option value="Choice Z">Strawberries</option>
-			<option value="Choice Z">Pineapple</option>
-            </select>
-			<h2>Choice of Toppings</h2>
-            <select id="typeSelect3">
-            <option value="Choice X">Granola</option>
-            <option value="Choice Y">Cacao Nibs</option>
-            <option value="Choice Z">Goji Berries</option>
-			<option value="Choice Z">Almond Flakes</option>
-            </select>
-			<div class="quantity-control">
-                <button class="minus" onclick="decrementQuantity(this)">-</button>
-                <span class="quantity">1</span>
-                <button class="plus" onclick="incrementQuantity(this)">+</button>
-            </div>
-			<div class="add-to-cart-button">
-            <button onclick="addToCart()">Add to Cart</button>
-            </div>
-            </div>
-          </div>
-       </div>
-     </div>
+        </section>
         
+        <!-- You can add more categories/sections here -->
 
-        <div class="product-item">
-             <img src="product3.png" alt="Open Popup" onclick="openPopup()" style="cursor: pointer;">
-            <h2>Nutty Heaven</h2>
-            <p>Acai with Greek yoghurt base</p>
-            <div class="popup-overlay" id="popup">
-              <div class="popup-content">
-              <span class="popup-close" onclick="closePopup()">&times;</span>
-              <div class="popup-left">
-              <img class="popup-image" img src="product3.png" alt="Image" style="max-width: 100%;">
-            </div>
-            <div class="popup-right">
-            <h2>Size</h2>
-            <select id="typeSelect">
-            <option value="Option 1">Small</option>
-            <option value="Option 2">Medium</option>
-            <option value="Option 3">Large</option>
-            </select>
-            <h2>Choice of Drizzle</h2>
-            <select id="typeSelect2">
-            <option value="Option A">Cookie Butter</option>
-            <option value="Option B">Caramel Sauce</option>
-            <option value="Option C">Almond Butter</option>
-            </select>
-            <h2>Choice of Fruits</h2>
-            <select id="typeSelect3">
-            <option value="Choice X">Blueberries</option>
-            <option value="Choice Y">Bananas</option>
-            <option value="Choice Z">Strawberries</option>
-			<option value="Choice Z">Pineapple</option>
-            </select>
-			<h2>Choice of Toppings</h2>
-            <select id="typeSelect3">
-            <option value="Choice X">Granola</option>
-            <option value="Choice Y">Cacao Nibs</option>
-            <option value="Choice Z">Goji Berries</option>
-			<option value="Choice Z">Almond Flakes</option>
-            </select>
-			<div class="quantity-control">
-                <button class="minus" onclick="decrementQuantity(this)">-</button>
-                <span class="quantity">1</span>
-                <button class="plus" onclick="incrementQuantity(this)">+</button>
-            </div>
-			<div class="add-to-cart-button">
-            <button onclick="addToCart()">Add to Cart</button>
-            </div>
-            </div>
-          </div>
-       </div>
-     </div>
-        
-
-        <div class="product-item">
-             <img src="product4.png" alt="Open Popup" onclick="openPopup()" style="cursor: pointer;">
-            <h2>Choco Crumble</h2>
-            <p>Acai with chunks of dark chocolate, chocolate drizzle and granola toppings</p>
-			<div class="popup-overlay" id="popup">
-              <div class="popup-content">
-              <span class="popup-close" onclick="closePopup()">&times;</span>
-              <div class="popup-left">
-              <img class="popup-image" img src="product4.png" alt="Image" style="max-width: 100%;">
-            </div>
-            <div class="popup-right">
-            <h2>Size</h2>
-            <select id="typeSelect">
-            <option value="Option 1">Small</option>
-            <option value="Option 2">Medium</option>
-            <option value="Option 3">Large</option>
-            </select>
-            <h2>Choice of Drizzle</h2>
-            <select id="typeSelect2">
-            <option value="Option A">Cookie Butter</option>
-            <option value="Option B">Caramel Sauce</option>
-            <option value="Option C">Almond Butter</option>
-            </select>
-            <h2>Choice of Fruits</h2>
-            <select id="typeSelect3">
-            <option value="Choice X">Blueberries</option>
-            <option value="Choice Y">Bananas</option>
-            <option value="Choice Z">Strawberries</option>
-			<option value="Choice Z">Pineapple</option>
-            </select>
-			<h2>Choice of Toppings</h2>
-            <select id="typeSelect3">
-            <option value="Choice X">Granola</option>
-            <option value="Choice Y">Cacao Nibs</option>
-            <option value="Choice Z">Goji Berries</option>
-			<option value="Choice Z">Almond Flakes</option>
-            </select>
-			<div class="quantity-control">
-                <button class="minus" onclick="decrementQuantity(this)">-</button>
-                <span class="quantity">1</span>
-                <button class="plus" onclick="incrementQuantity(this)">+</button>
-            </div>
-			<div class="add-to-cart-button">
-            <button onclick="addToCart()">Add to Cart</button>
-            </div>
-            </div>
-          </div>
-       </div>
-     </div>
-        
     </div>
 
-<script>
-    function openPopup() {
-      var popup = document.getElementById('popup');
-      popup.style.display = 'block';
-    }
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <div class="popup-left">
+                <img class="popup-image" src="" alt="Image" style="max-width: 100%;">
+            </div>
+            <div class="popup-right">
+                <h2>Size</h2>
+                <select id="sizeSelect">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+    
+                <h2>Choice of Additional Topping <span class="optional">Optional</span></h2>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" data-price="1.10" value="pomegranate-seeds"> Pomegranate seeds <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="golden-flax-seeds"> Golden flax seeds <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="sunflower-seeds"> Sunflower seeds <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="crushed-walnuts"> Crushed walnuts <span class="price">+$1.10</span></label>
 
-    function closePopup() {
-      var popup = document.getElementById('popup');
-      popup.style.display = 'none';
-    }
-	
-	function incrementQuantity(button) {
-            // Get the quantity element in the same product item's popup
-            var quantityElement = button.parentElement.querySelector('.quantity');
-            var currentQuantity = parseInt(quantityElement.textContent);
-            // Increment the quantity
-            currentQuantity++;
-            // Update the quantity in the UI
-            quantityElement.textContent = currentQuantity;
-        }
+                </div>
+    
+                <h2>Choice of Additional Fruit <span class="optional">Optional</span></h2>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" data-price="1.10" value="passion-fruit"> Passion fruit <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="blackberries"> Blackberries <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="papaya"> Papaya <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="peach-slices"> Peach slices <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="dragon-fruit-chunks"> Dragon fruit chunks <span class="price">+$1.10</span></label>
+                </div>
+    
+                <h2>Choice of Additional Drizzle <span class="optional">Optional</span></h2>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" data-price="1.10" value="mango-puree"> Mango purée <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="caramelized-coconut-nectar"> Caramelized coconut nectar <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="raspberry-reduction"> Raspberry reduction <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="mint-infused-agave-syrup"> Mint-infused agave syrup <span class="price">+$1.10</span></label>
+                </div>
+    
+                <div class="add-to-cart-button">
+                    <button onclick="addToCart('<?php echo $productName; ?>')Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
 
-        function decrementQuantity(button) {
-            // Get the quantity element in the same product item's popup
-            var quantityElement = button.parentElement.querySelector('.quantity');
-            var currentQuantity = parseInt(quantityElement.textContent);
-            // Ensure the quantity doesn't go below 1
-            if (currentQuantity > 1) {
-                // Decrement the quantity
-                currentQuantity--;
-                // Update the quantity in the UI
-                quantityElement.textContent = currentQuantity;
-            }
-        }
-
-        function addToCart(button) {
-            // Get the quantity from the UI
-            var quantity = parseInt(button.parentElement.querySelector('.quantity').textContent);
-            // Handle adding the selected item to the cart with the selected quantity
-            alert("Item added to cart with quantity: " + quantity);
-        }
-  </script>
 </body>
 </html>
-
-

@@ -57,5 +57,9 @@ function closePopup() {
 
 function addToCart(productName) {
     // Use JavaScript to create a URL that adds the chosen product to the cart
+<<<<<<< HEAD
     window.location.href = `<?php echo $_SERVER['PHP_SELF']; ?>?buy=${productName}`;
 }
+=======
+    window.location.href = `<?php echo $_SERVER['PHP_SELF']; ?>?buy=${productName}`;
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6

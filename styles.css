@@ -6,6 +6,7 @@ body, header {
     padding: 0;
 }
 
+<<<<<<< HEAD
 body {
 margin: 0;
   padding: 0;
@@ -15,6 +16,15 @@ margin: 0;
   background-size: cover; /* This will ensure your image covers the whole body */
   background-repeat: no-repeat;
 
+=======
+body {font-family:Lato,  sans-serif;
+    background-color: #F8E4E4;
+	background-image: url('Assets/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	background-color: rgba(255, 255, 255, 0.5)
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
 }
 
 header {
@@ -26,7 +36,12 @@ header {
     color: white;
     padding: 10px 20px; /* Add padding for spacing above and below the navigation bar */
     text-align: center; /* Center text within the header */
+<<<<<<< HEAD
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+=======
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	background-color: rgba(255, 255, 255, 0.0)
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
     
 }
 
@@ -54,9 +69,11 @@ li {
 .navbar {
 	margin-right: 60px;
 	display: flex;
+	align-items: center;
     text-align: center;
     background-color: #F8E4E4; /* Background color for the navbar */
 	padding: 10px 20px; /* Add padding for spacing around the navigation */
+	background-color: rgba(255, 255, 255, 0)
 }   
 
 /* Style the anchor (link) tags */
@@ -68,12 +85,20 @@ li {
     transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
+<<<<<<< HEAD
 .navbar ul {
     display: flex;
     flex-wrap: wrap; /* Ensure navbar items can wrap */
     justify-content: center; /* Center items when they wrap */
     gap: 10px; /* Adjust gap for a better look */
     padding: 0; /* Reset padding */
+=======
+.navbar a:hover {
+    color: #333333; /* Slightly darker on hover */
+}
+.navbar a:focus {
+    outline: 2px solid #333333; /* Visible outline when focused */
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
 }
 
 .navbar a:hover {
@@ -128,6 +153,10 @@ li {
 .outlets-section {
     display: flex;
     justify-content: space-between;
+<<<<<<< HEAD
+=======
+	background-color: rgba(255, 255, 255, 0.7)
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
     
 }
 
@@ -178,8 +207,12 @@ li {
 .contact-section {
     padding: 30px;
     text-align: center;
+<<<<<<< HEAD
     background-color: #F8E4E4; /* Updated background color */
+=======
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
     border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.5)
 }
 
 .contact-section h2 {
@@ -270,14 +303,22 @@ input[type=email], input[type=password] {
 
 /* Submit Button Styling */
 input[type=submit] {
+<<<<<<< HEAD
     background-color: #cc90ed; /* Primary color */
+=======
+    background-color: #007bff; /* Primary color */
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
     color: white;
     border: none;
     cursor: pointer;
 }
 
 input[type=submit]:hover {
+<<<<<<< HEAD
     background-color: #c584e1; /* Darken button on hover */
+=======
+    background-color: #0056b3; /* Darken button on hover */
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
 }
 
 .message {
@@ -285,12 +326,15 @@ input[type=submit]:hover {
     margin-bottom: 20px;
 }
 
+<<<<<<< HEAD
 .register-link {
     margin-top: 15px; /* Adjust the space above the text as needed */
     font-size: 0.9em; /* Adjust font size as needed */
     text-align: center; /* Centers the text */
 
 }
+=======
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
 /* End of Login screen */
 
 /* Responsive Layout for Laptops and Larger Screens */
@@ -301,7 +345,10 @@ input[type=submit]:hover {
 }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
 .main_cart {
     position: relative;
     display: inline-block;
@@ -615,6 +662,7 @@ h2 {
 }
 /* End of Pop up styl */
 
+<<<<<<< HEAD
 /* cart icon styling */
 .cart-icon {
     position: relative;
@@ -733,10 +781,78 @@ h2 {
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
+=======
+/*  FAQ Design */
+.faq-section {
+    padding: 30px;
+    background-color: #F8E4E4; /* Updated background color */
+    border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.faq-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+	text-align: center;
+}
+
+.faq-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+	text-align: center;
+}
+
+.faq-question  {
+    font-size: 18px;
+    margin-bottom: 20px;
+	align-items: left;
+}
+.faq-answer {
+    font-size: 18px;
+    margin-bottom: 20px;
+	align-items: left;
+}
+/* End of FAQ Design*/
+
+/*  Cart Design */
+/* Center the content vertically at the top */
+/* Add a CSS rule to center the content within .centered-content */
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30vh; /* 100% viewport height to center vertically */
+}
+.centered-content > * {
+    margin-bottom: 20px; /* Add margin at the bottom of each child element */
+}
+/*End of Cart design*/
+
+/*  Checkout Form Design */
+.checkout-section {
+    padding: 30px;
+    background-color: #F8E4E4; /* Updated background color */
+    border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+.checkout-section h2{
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+}
+/* Style the labels and form inputs */
+.checkout-section label {
+    display: inline-block; /* Display the labels as inline blocks */
+    width: 30%; /* Set a fixed width for the labels (adjust as needed) */
+    text-align: right; /* Right-align the labels */
+    margin-right: 10px; /* Add space between the labels and input boxes */
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
 }
 
 .checkout-section input[type="text"],
 .checkout-section input[type="tel"],
+<<<<<<< HEAD
 .checkout-section input[type="email"],
 .checkout-section select {
     width: 100%;
@@ -784,3 +900,41 @@ h2 {
 .checkout-section input[type="submit"]:hover {
     background-color: #45a049;
 }
+=======
+.checkout-section select {
+    width: 60%; /* Set a fixed width for the input boxes (adjust as needed) */
+    padding: 10px; /* Add padding for spacing within the input boxes */
+    margin-bottom: 10px; /* Add space between input boxes */
+	border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style the select input */
+.checkout-section select {
+    width: 60%;
+	padding: 10px; /* Add padding for spacing within the input boxes */
+    margin-top: 10px;
+    margin-bottom: 10px; /* Add space between input boxes */
+	border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style the submit button */
+.checkout-section button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+	display: block; /* Make the button a block element */
+    margin: 0 auto; /* Center horizontally */
+	margin-top: 10px;
+}
+
+/* Add additional CSS as needed for error tooltips or other elements */
+.checkout-section .error-tooltip {
+    color: red;
+}
+
+
+>>>>>>> cbe514ca4c70748e9fa83582cd607b31e1af9ab6
