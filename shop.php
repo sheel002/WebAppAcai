@@ -254,6 +254,35 @@ error_reporting(E_ALL);
             margin-top: 20px;
         }
     /* End of Pop up styl */
+    /* price styling */
+
+    .price {
+    color: #81857e; /* A vibrant color for the price */
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 1.1em; /* Slightly larger font size for emphasis */
+    display: inline-block; /* Allows you to control dimensions */
+    padding: 3px 6px; /* Small padding for aesthetic spacing */
+    background-color: #fff3e0; /* A subtle background color */
+    border-radius: 4px; /* Rounded corners for a tag-like appearance */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+    /* You could also add a before pseudo-element for a price tag icon */
+    .price:before {
+        display: inline-block;
+        font-size: 1em;
+        margin-right: 4px;
+        color: #E44D26; /* Same vibrant color for the icon */
+    }
+
+    /* Additional hover effect for interactivity */
+    .price:hover {
+        background-color: #ffe5d1; /* A lighter background on hover */
+        transition: background-color 0.3s; /* Smooth transition for background color */
+    }
+
+    /* end of  styling */
 
     </style>
 </head>
@@ -361,13 +390,16 @@ error_reporting(E_ALL);
             const section = document.getElementById(sectionId);
 
             let productHTML = products.map(product => `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>${product.ingredients}</p>
-                    <p class="price">${product.price}</p>
-                    <button onclick="openPopup('${product.image}', '${product.name}', '${product.price.replace("$","")}')">Add to Cart</button>
-                </div>
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.ingredients}</p>
+                <p class="price">${product.price}</p>
+                ${product.inventory > 0 ? 
+                    `<button onclick="openPopup('${product.image}', '${product.name}', '${product.price.replace("$","")}', '${product.inventory}')">Add to Cart</button>` : 
+                    `<button disabled>Out of Stock</button>`
+                }
+            </div>
             `).join('');
 
             const productContainer = section.querySelector(".products-display");
@@ -379,12 +411,18 @@ error_reporting(E_ALL);
         });
 }
 
-        function openPopup(imageSrc, productName, basePrice) {
+    function openPopup(imageSrc, productName, basePrice, inventory) {
+
+            if(parseInt(inventory) === 0) {
+            alert("This product is out of stock.");
+            return; // Prevent the popup from opening
+            }
             // Set the image and product name in the popup
             const popupImage = document.querySelector('.popup-image');
             popupImage.src = imageSrc;
             popupImage.alt = productName;
 
+            
             // Reset selections
             document.getElementById("sizeSelect").value = "small";
             const toppings = document.querySelectorAll('.checkbox-list input');
@@ -397,6 +435,8 @@ error_reporting(E_ALL);
             const popup = document.getElementById('popup');
             popup.style.display = 'flex';
 
+            
+
             // Store the base price in the size select for later reference
             const sizeSelect = document.getElementById("sizeSelect");
             sizeSelect.setAttribute('data-base-price', basePrice);
@@ -405,10 +445,14 @@ error_reporting(E_ALL);
             const popupRight = document.querySelector('.popup-right');
             popupRight.setAttribute('data-product-name', productName);  // Set product name as a data attribute
 
+            // Store the inventory in the quantity select for later reference
+            const quantitySelect = document.getElementById("quantitySelect");
+            quantitySelect.setAttribute('max', inventory);
+
 
             }
 
-        function updatePrice(basePrice) {
+            function updatePrice(basePrice) {
             let totalPrice = parseFloat(basePrice);
 
             // Additional price based on size
@@ -426,8 +470,23 @@ error_reporting(E_ALL);
             const quantity = parseInt(document.getElementById("quantitySelect").value) || 1;
             totalPrice *= quantity;
 
+            // Update the displayed price
             document.querySelector('.popup-price').textContent = `$${totalPrice.toFixed(2)}`;
         }
+
+        // Attach the event listener to the quantity input
+        document.getElementById("quantitySelect").addEventListener("input", function() {
+            const basePrice = document.getElementById("sizeSelect").getAttribute('data-base-price');
+            const maxQuantity = parseInt(this.getAttribute('max'));
+            let quantity = parseInt(this.value) || 1;
+
+            if (quantity > maxQuantity) {
+                alert(`Only ${maxQuantity} items in stock`);
+                this.value = maxQuantity; // Set quantity to max available if overstock
+            }
+
+            updatePrice(basePrice);
+        });
 
 
         function closePopup() {
@@ -453,18 +512,26 @@ error_reporting(E_ALL);
         });
                 
         function addToCart() {
-            if (!isLoggedIn) {
-            alert("Please login first!");
-            return;
-        }
-        
-        // Fetch product details
-        const productName = document.querySelector('.popup-right').getAttribute('data-product-name');
-        const priceText = document.querySelector('.popup-price').innerText;
-        const price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
-        const size = document.getElementById("sizeSelect").value;
-        const quantity = document.getElementById("quantitySelect").value;
-        const category = document.querySelector('.popup-right h2').getAttribute('data-category');
+    if (!isLoggedIn) {
+        alert("Please login first!");
+        return;
+    }
+
+    // Fetch product details
+    const productName = document.querySelector('.popup-right').getAttribute('data-product-name');
+    const priceText = document.querySelector('.popup-price').innerText;
+    const price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+    const size = document.getElementById("sizeSelect").value;
+    const quantitySelect = document.getElementById("quantitySelect");
+    const quantity = parseInt(quantitySelect.value);
+    const maxQuantity = parseInt(quantitySelect.getAttribute('max'));
+    const category = document.querySelector('.popup-right h2').getAttribute('data-category');
+
+    // Check if the requested quantity is less than or equal to the inventory
+    if (quantity > maxQuantity) {
+        alert(`Only ${maxQuantity} items in stock`);
+        return;
+    }
 
         // Fetch add-ons
         let addOns = [];

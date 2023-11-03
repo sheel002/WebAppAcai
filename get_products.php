@@ -9,7 +9,7 @@ include 'db_connection.php';
 
 $category = $_GET['category'] ?? '';
 
-$stmt = $conn->prepare("SELECT name, price, image, ingredients FROM products WHERE category = ?");
+$stmt = $conn->prepare("SELECT name, price, image, ingredients, inventory FROM products WHERE category = ?");
 $stmt->execute([$category]);
 $result = $stmt->get_result();
 // $products = $result->fetch_all(PDO::FETCH_ASSOC);
@@ -26,4 +26,3 @@ echo json_encode($products);
 
 $conn->close();
 ?>
-

@@ -24,9 +24,9 @@ error_reporting(E_ALL);
         }
 
     .faq-entry {
-    background-color: #FFFFFF;
+
     border: 1px solid #ddd;
-    padding: 3px 25px; /* Increased padding */
+    padding: 3px 40px; /* Increased padding */
     border-radius: 5px; /* Slightly larger radius */
     margin-bottom: 5px; /* Increased spacing */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -62,6 +62,8 @@ error_reporting(E_ALL);
         margin-top: 15px; /* More space above answer */
         color: #666;
         line-height: 1.6; /* Increased line height for readability */
+        font-weight: bold;
+
     }
 
     .faq-hr {
@@ -71,6 +73,7 @@ error_reporting(E_ALL);
 
     .inquiry-contact {
     text-align: center; /* Center aligns all content inside the div */
+
 }
 
 .inquiry-contact p {
@@ -125,7 +128,7 @@ error_reporting(E_ALL);
 </head>
 <body>
 <br><br>
-<h2>Frequently Asked Questions </h2><br><br>
+<h2>Frequently Asked Questions </h2>
         
         <div class="faq-entry">
             <div class="faq-question">

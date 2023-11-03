@@ -1,12 +1,11 @@
 <?php
 session_start();
-include('db_connection.php'); 
+include('db_connection.php');
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Change to 'logged_in' for consistency
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     echo json_encode(["success" => false, "message" => "User not logged in"]);
     exit;
@@ -20,32 +19,41 @@ if (empty($cartItems)) {
     exit;
 }
 
-// Assuming 'user_id' is also stored in session upon successful login.
 $userId = $_SESSION['user_id']; 
 $conn->autocommit(FALSE);
 
 try {
-    $stmt = $conn->prepare("INSERT INTO user_cart (user_id, product_name, product_price, size, quantity, category, add_ons, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $insertStmt = $conn->prepare("INSERT INTO user_cart (user_id, product_name, product_price, size, quantity, category, add_ons, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $updateInventoryStmt = $conn->prepare("UPDATE products SET inventory = inventory - ? WHERE name = ?");
 
     foreach ($cartItems as $item) {
         $addOnsJson = json_encode($item['addOns'] ?? []);
         $price = floatval($item['price']);
         $quantity = intval($item['quantity']);
-        // Ensure that the types in bind_param match the types of the variables
-        $stmt->bind_param("isdssis", $userId, $item['name'], $price, $item['size'], $quantity, $item['category'], $addOnsJson);
-        if (!$stmt->execute()) {
-            throw new Exception("Execute failed: " . $stmt->error);
+
+        // Insert order details into user_cart
+        $insertStmt->bind_param("isdssis", $userId, $item['name'], $price, $item['size'], $quantity, $item['category'], $addOnsJson);
+        if (!$insertStmt->execute()) {
+            throw new Exception("Execute failed: " . $insertStmt->error);
+        }
+
+        // Update inventory in products table
+        $updateInventoryStmt->bind_param("is", $quantity, $item['name']);
+        if (!$updateInventoryStmt->execute()) {
+            throw new Exception("Failed to update inventory: " . $updateInventoryStmt->error);
         }
     }
 
     $conn->commit();
-    // Clear the cart after successful order
     $_SESSION['cart'] = [];
     echo json_encode(["success" => true, "message" => "Order confirmed successfully"]);
 } catch (Exception $e) {
     $conn->rollback();
     echo json_encode(["success" => false, "message" => "Error in confirming order: " . $e->getMessage()]);
+} finally {
+    // Always close the statement and the connection
+    $insertStmt->close();
+    $updateInventoryStmt->close();
+    $conn->close();
 }
-
-$conn->close();
 ?>

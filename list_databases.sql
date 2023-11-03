@@ -48,3 +48,7 @@ VALUES
 (8, 'Citrus Splash Bowl', 7.49, 'bowls', 'Assets/bowl3.png', 'Oranges, Grapefruit, Goji Berries, Mint'),
 (9, 'Green Oasis Bowl', 8.99, 'bowls', 'Assets/bowl4.png', 'Spinach, Avocado, Hemp Seeds, Lime Zest'),
 (10, 'Ruby Indulgence Bowl', 9.49, 'bowls', 'Assets/bowl5.png', 'Raspberries, Strawberries, Cacao Nibs, Almond Butter');
+
+
+
+UPDATE products SET inventory = 10;
