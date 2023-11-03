@@ -6,6 +6,14 @@ CREATE TABLE Users (
      Password VARCHAR(255),
      Address TEXT
  );
+
+CREATE TABLE ContactForm (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    subject VARCHAR(255),
+    message TEXT
+);
  
 CREATE TABLE user_cart (
     id INT PRIMARY KEY,
