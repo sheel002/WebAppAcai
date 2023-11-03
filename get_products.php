@@ -18,11 +18,19 @@ $result = $stmt->get_result();
 $products = array();
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
+<<<<<<< HEAD
         $products[] = $row;
     }
 }
 
 echo json_encode($products);
+=======
+        $acai_products[] = $row;
+    }
+}
+
+echo json_encode($acai_products);
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
 
 $conn->close();
 ?>

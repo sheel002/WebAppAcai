@@ -1,14 +1,11 @@
-<?php //catalog.php
+<?php
 session_start();
-if (!isset($_SESSION['cart'])){
-	$_SESSION['cart'] = array();
-}
-if (isset($_GET['buy'])) {
-	$_SESSION['cart'][] = $_GET['buy'];
-	header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
-	exit();
-}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,91 +13,67 @@ if (isset($_GET['buy'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <Script>
-        document.addEventListener("DOMContentLoaded", function() {
-        populateProducts('smoothies', 'smoothiesSection');
-        populateProducts('bowls', 'bowlsSection');
-    });  
+            document.addEventListener("DOMContentLoaded", function() {
+            populateProducts('smoothies', 'smoothiesSection');
+            populateProducts('bowls', 'bowlsSection');
+        });  
 
-    function populateProducts(category, sectionId) {
-    const section = document.getElementById(sectionId);
+        function populateProducts(category, sectionId) {
+        const section = document.getElementById(sectionId);
 
-    let products = [];
-    if (category === 'smoothies') {
-        products = [
-            {name: "Pineapple Sundance Smoothie", image: "Assets/smoothie1.png", ingredients: "Pineapple, Banana, Orange Juice, Lime Zest."},
-            {name: "Berry Medley Smoothie", image: "Assets/smoothie2.png", ingredients: "Blueberries, Strawberries, Almond Milk, Chia Seeds."},
-            {name: "Golden Glow Smoothie", image: "Assets/smoothie3.png", ingredients: "Mango, Pineapple, Honey, Coconut Milk."},
-            {name: "Minty Melon Smoothie", image: "Assets/smoothie4.png", ingredients: "Watermelon, Mint Leaves, Lime Juice, Agave Syrup."},
-            {name: "Creamy Caramel Crunch Smoothie", image: "Assets/smoothie5.png", ingredients: "Dates, Cashews, Almond Milk, Caramel Syrup."}
-        ];
-    } else if (category === 'bowls') {
-        products = [
-            {name: "Tropical Bliss Bowl", image: "Assets/bowl1.png", ingredients: "Mango, Kiwi, Coconut Flakes, Chia Seeds."},
-            {name: "Nutty Forest Bowl", image: "Assets/bowl2.png", ingredients: "Almonds, Dark Chocolate, Granola, Honey."},
-            {name: "Citrus Splash Bowl", image: "Assets/bowl3.png", ingredients: "Oranges, Grapefruit, Goji Berries, Mint."},
-            {name: "Green Oasis Bowl", image: "Assets/bowl4.png", ingredients: "Spinach, Avocado, Hemp Seeds, Lime Zest."},
-            {name: "Ruby Indulgence Bowl", image: "Assets/bowl5.png", ingredients: "Raspberries, Strawberries, Cacao Nibs, Almond Butter."}
-        ];
-    }
+        let products = [];
+        if (category === 'smoothies') {
+            products = [
+                {name: "Pineapple Sundance Smoothie", image: "Assets/smoothie1.png", ingredients: "Pineapple, Banana, Orange Juice, Lime Zest."},
+                {name: "Berry Medley Smoothie", image: "Assets/smoothie2.png", ingredients: "Blueberries, Strawberries, Almond Milk, Chia Seeds."},
+                {name: "Golden Glow Smoothie", image: "Assets/smoothie3.png", ingredients: "Mango, Pineapple, Honey, Coconut Milk."},
+                {name: "Minty Melon Smoothie", image: "Assets/smoothie4.png", ingredients: "Watermelon, Mint Leaves, Lime Juice, Agave Syrup."},
+                {name: "Creamy Caramel Crunch Smoothie", image: "Assets/smoothie5.png", ingredients: "Dates, Cashews, Almond Milk, Caramel Syrup."}
+            ];
+        } else if (category === 'bowls') {
+            products = [
+                {name: "Tropical Bliss Bowl", image: "Assets/bowl1.png", ingredients: "Mango, Kiwi, Coconut Flakes, Chia Seeds."},
+                {name: "Nutty Forest Bowl", image: "Assets/bowl2.png", ingredients: "Almonds, Dark Chocolate, Granola, Honey."},
+                {name: "Citrus Splash Bowl", image: "Assets/bowl3.png", ingredients: "Oranges, Grapefruit, Goji Berries, Mint."},
+                {name: "Green Oasis Bowl", image: "Assets/bowl4.png", ingredients: "Spinach, Avocado, Hemp Seeds, Lime Zest."},
+                {name: "Ruby Indulgence Bowl", image: "Assets/bowl5.png", ingredients: "Raspberries, Strawberries, Cacao Nibs, Almond Butter."}
+            ];
+        }
 
-    let productHTML = products.map(product => `
-        <div class="product-card">
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.ingredients}</p>
-            <button onclick="openPopup('${product.image}', '${product.name}')">Add to Cart</button>
-        </div>
-    `).join('');
+        let productHTML = products.map(product => `
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.ingredients}</p>
+                <button onclick="openPopup('${product.image}', '${product.name}')">Add to Cart</button>
+            </div>
+        `).join('');
 
-    const productContainer = section.querySelector(".products-display");
-    productContainer.innerHTML = productHTML;
+        const productContainer = section.querySelector(".products-display");
+        productContainer.innerHTML = productHTML;
 
-     // cart function
-    let cart = [];
-
-    function addToCart() {
-        // Create an item object based on user's choices
-        let item = {
-            name: document.querySelector('.popup-image').alt,
-            size: document.getElementById('sizeSelect').value,
-            toppings: Array.from(document.querySelectorAll('.checkbox-list input:checked')).map(checkbox => checkbox.value)
-        };
-
-        // Add item to cart
-        cart.push(item);
-
-        // Update cart count
-        document.querySelector('.cart-count').innerText = cart.length;
-
-        // Close the popup
-        closePopup();
-    }
+        }
 
 
-}
+        function openPopup(imageSrc, productName) {
+            // Set the image and product name in the popup
+            const popupImage = document.querySelector('.popup-image');
+            popupImage.src = imageSrc;
+            popupImage.alt = productName;
+
+            // Display the popup
+            const popup = document.getElementById('popup');
+            popup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
 
 
-    function openPopup(imageSrc, productName) {
-        // Set the image and product name in the popup
-        const popupImage = document.querySelector('.popup-image');
-        popupImage.src = imageSrc;
-        popupImage.alt = productName;
+        
 
-        // Display the popup
-        const popup = document.getElementById('popup');
-        popup.style.display = 'flex';
-    }
-
-    function closePopup() {
-        const popup = document.getElementById('popup');
-        popup.style.display = 'none';
-    }
-
-    function checkout() {
-    if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
-    }
 
     </script>
     <style>
@@ -343,23 +316,22 @@ if (isset($_GET['buy'])) {
         </div>
         <div class="navbar">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="outlets.html">Outlets</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="outlets.php">Outlets</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <?php if(isset($_SESSION['UserID'])): ?>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="shop.php">Shop</a></li>
+                <li><a href="faq.php">FAQ</a></li>
+                <?php 
+                if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
+                    <li><a href="login.php" class="nav-item login">Login</a></li>
+                    <li><a href="register.php" class="nav-item register">Register</a></li>
                 <?php else: ?>
-                    <li><a href="register.php">Register</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <li><a href="logout.php" class="nav-item logout">Logout</a></li>
                 <?php endif; ?>
             </ul>
-			<a href="cart.html">
-            <img src="cart-icon.png" alt="Cart Icon" class="cart-icon">
-            </a>
         </div>
     </header>
+
     <div class="shop-content">
         <section id="smoothiesSection">
             <h2>Smoothies</h2>
@@ -419,9 +391,12 @@ if (isset($_GET['buy'])) {
                     <label><input type="checkbox" data-price="1.10" value="raspberry-reduction"> Raspberry reduction <span class="price">+$1.10</span></label>
                     <label><input type="checkbox" data-price="1.10" value="mint-infused-agave-syrup"> Mint-infused agave syrup <span class="price">+$1.10</span></label>
                 </div>
+                <h2>Quantity</h2>
+                <input type="number" id="quantitySelect" value="1" min="1" style="width: 50px; margin-bottom: 20px;">
+
     
                 <div class="add-to-cart-button">
-                    <button onclick="addToCart('<?php echo $productName; ?>')Add to Cart</button>
+                    <button onclick="addToCart()" class="checkout-button">Add to Cart</button>
                 </div>
             </div>
         </div>

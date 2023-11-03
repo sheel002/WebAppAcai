@@ -5,7 +5,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +17,73 @@ error_reporting(E_ALL);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
+<<<<<<< HEAD
+=======
+    <Script>
+            document.addEventListener("DOMContentLoaded", function() {
+            populateProducts('smoothies', 'smoothiesSection');
+            populateProducts('bowls', 'bowlsSection');
+        });  
+
+        function populateProducts(category, sectionId) {
+        const section = document.getElementById(sectionId);
+
+        let products = [];
+        if (category === 'smoothies') {
+            products = [
+                {name: "Pineapple Sundance Smoothie", image: "Assets/smoothie1.png", ingredients: "Pineapple, Banana, Orange Juice, Lime Zest."},
+                {name: "Berry Medley Smoothie", image: "Assets/smoothie2.png", ingredients: "Blueberries, Strawberries, Almond Milk, Chia Seeds."},
+                {name: "Golden Glow Smoothie", image: "Assets/smoothie3.png", ingredients: "Mango, Pineapple, Honey, Coconut Milk."},
+                {name: "Minty Melon Smoothie", image: "Assets/smoothie4.png", ingredients: "Watermelon, Mint Leaves, Lime Juice, Agave Syrup."},
+                {name: "Creamy Caramel Crunch Smoothie", image: "Assets/smoothie5.png", ingredients: "Dates, Cashews, Almond Milk, Caramel Syrup."}
+            ];
+        } else if (category === 'bowls') {
+            products = [
+                {name: "Tropical Bliss Bowl", image: "Assets/bowl1.png", ingredients: "Mango, Kiwi, Coconut Flakes, Chia Seeds."},
+                {name: "Nutty Forest Bowl", image: "Assets/bowl2.png", ingredients: "Almonds, Dark Chocolate, Granola, Honey."},
+                {name: "Citrus Splash Bowl", image: "Assets/bowl3.png", ingredients: "Oranges, Grapefruit, Goji Berries, Mint."},
+                {name: "Green Oasis Bowl", image: "Assets/bowl4.png", ingredients: "Spinach, Avocado, Hemp Seeds, Lime Zest."},
+                {name: "Ruby Indulgence Bowl", image: "Assets/bowl5.png", ingredients: "Raspberries, Strawberries, Cacao Nibs, Almond Butter."}
+            ];
+        }
+
+        let productHTML = products.map(product => `
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.ingredients}</p>
+                <button onclick="openPopup('${product.image}', '${product.name}')">Add to Cart</button>
+            </div>
+        `).join('');
+
+        const productContainer = section.querySelector(".products-display");
+        productContainer.innerHTML = productHTML;
+
+        }
+
+
+        function openPopup(imageSrc, productName) {
+            // Set the image and product name in the popup
+            const popupImage = document.querySelector('.popup-image');
+            popupImage.src = imageSrc;
+            popupImage.alt = productName;
+
+            // Display the popup
+            const popup = document.getElementById('popup');
+            popup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+
+
+        
+
+
+    </script>
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
     <style>
     body {
             font-family: Arial, sans-serif;
@@ -52,6 +122,7 @@ error_reporting(E_ALL);
         .popup-left {
             border-right: 1px solid #ccc;
         }
+<<<<<<< HEAD
 
         .checkout-button {
         background-color: #4CAF50; /* Change this to your desired background color */
@@ -63,6 +134,8 @@ error_reporting(E_ALL);
         font-size: 1em; /* Adjust the font size as needed */
     }
 
+=======
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
         h2 {
             margin-top: 0;
             font-size: 20px;
@@ -270,7 +343,10 @@ error_reporting(E_ALL);
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="shop.php">Shop</a></li>
                 <li><a href="faq.php">FAQ</a></li>
+<<<<<<< HEAD
                 <li class="cart-icon">
+=======
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
                 <?php 
                 if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false): ?>
                     <li><a href="login.php" class="nav-item login">Login</a></li>
@@ -278,6 +354,7 @@ error_reporting(E_ALL);
                 <?php else: ?>
                     <li><a href="logout.php" class="nav-item logout">Logout</a></li>
                 <?php endif; ?>
+<<<<<<< HEAD
                 <a href="cart.php">
                     <img src="Assets/cart-icon.png" alt="Cart" class="cart-img"> 
                     <!-- Displaying the count of items in the cart -->
@@ -286,6 +363,8 @@ error_reporting(E_ALL);
                     <?php endif; ?>
                 </a>
                 </li>
+=======
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
             </ul>
         </div>
     </header>
@@ -321,6 +400,7 @@ error_reporting(E_ALL);
                 <select id="sizeSelect">
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>
+<<<<<<< HEAD
                 </select>
     
                 <h2>Choice of Additional Toppings <span class="optional">Optional</span></h2>
@@ -334,6 +414,40 @@ error_reporting(E_ALL);
                 <input type="number" id="quantitySelect" value="1" min="1" style="width: 50px; margin-bottom: 20px;">
 
                 <h2 class="popup-price"></h2>
+=======
+                    <option value="large">Large</option>
+                </select>
+    
+                <h2>Choice of Additional Topping <span class="optional">Optional</span></h2>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" data-price="1.10" value="pomegranate-seeds"> Pomegranate seeds <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="golden-flax-seeds"> Golden flax seeds <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="sunflower-seeds"> Sunflower seeds <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="crushed-walnuts"> Crushed walnuts <span class="price">+$1.10</span></label>
+
+                </div>
+    
+                <h2>Choice of Additional Fruit <span class="optional">Optional</span></h2>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" data-price="1.10" value="passion-fruit"> Passion fruit <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="blackberries"> Blackberries <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="papaya"> Papaya <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="peach-slices"> Peach slices <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="dragon-fruit-chunks"> Dragon fruit chunks <span class="price">+$1.10</span></label>
+                </div>
+    
+                <h2>Choice of Additional Drizzle <span class="optional">Optional</span></h2>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" data-price="1.10" value="mango-puree"> Mango purée <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="caramelized-coconut-nectar"> Caramelized coconut nectar <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="raspberry-reduction"> Raspberry reduction <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="mint-infused-agave-syrup"> Mint-infused agave syrup <span class="price">+$1.10</span></label>
+                </div>
+                <h2>Quantity</h2>
+                <input type="number" id="quantitySelect" value="1" min="1" style="width: 50px; margin-bottom: 20px;">
+
+    
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
                 <div class="add-to-cart-button">
                     <button onclick="addToCart()" class="checkout-button">Add to Cart</button>
                 </div>
@@ -344,6 +458,7 @@ error_reporting(E_ALL);
     
 
 </body>
+<<<<<<< HEAD
 <script>
         var isLoggedIn = <?php echo isset($_SESSION['logged_in']) && $_SESSION['logged_in'] ? 'true' : 'false'; ?>;
 </script>
@@ -499,6 +614,8 @@ error_reporting(E_ALL);
         }
 
     </script>
+=======
+>>>>>>> 1f34b75c239be0b3358ba491b6f7e09861e59ec5
 </html>
 =======
 <?php
