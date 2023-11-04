@@ -53,5 +53,21 @@ $_SESSION['cart'] = [];
     <a href="index.php">Continue Shopping</a> <!-- Link back to the main shopping page or user dashboard -->
 
     <!-- You can also add more content such as recommendations, links to track the order, customer service contact info, etc. -->
+	<script>
+        // Function to send an AJAX request to confirm_order.php to handle the email sending
+    function sendConfirmationEmail() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "send_confirmation_email.php", true); // Change the URL to send_confirmation_email.php
+        xhr.send();
+    }
+
+    // Display the alert and send the email when the page loads
+    window.onload = function() {
+        alert('Order Confirmed!');
+        sendConfirmationEmail();
+        // Redirect to another page after the alert (if needed)
+        window.location.href = 'index.php'; // Change the URL to your desired page
+    }
+    </script>
 </body>
 </html>
