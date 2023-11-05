@@ -53,9 +53,9 @@ error_reporting(E_ALL);
         }
 
         .checkout-button {
-        background-color: #4CAF50; /* Change this to your desired background color */
-        color: white; /* Change text color if needed */
-        padding: 10px 15px; /* Adjust padding as needed */
+        background-color: #333; 
+        color: white; 
+        padding: 10px 15px; 
         border: none; /* Removes the border */
         border-radius: 4px; /* Adds rounded corners to your button */
         cursor: pointer; /* Changes cursor to indicate button functionality */
@@ -353,10 +353,10 @@ error_reporting(E_ALL);
     
                 <h2>Choice of Additional Toppings <span class="optional">Optional</span></h2>
                 <div class="checkbox-list">
-                    <label><input type="checkbox" data-price="1.10" value="pomegranate-seeds"> Pomegranate seeds <span class="price">+$1.10</span></label>
-                    <label><input type="checkbox" data-price="1.10" value="golden-flax-seeds"> Golden flax seeds <span class="price">+$1.10</span></label>
-                    <label><input type="checkbox" data-price="1.10" value="passion-fruit"> Passion fruit <span class="price">+$1.10</span></label>
-                    <label><input type="checkbox" data-price="1.10" value="blackberries"> Blackberries <span class="price">+$1.10</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="pomegranate-seeds"> Pomegranate seeds <span class="price">+$2</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="golden-flax-seeds"> Golden flax seeds <span class="price">+$2</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="passion-fruit"> Passion fruit <span class="price">+$2</span></label>
+                    <label><input type="checkbox" data-price="1.10" value="blackberries"> Blackberries <span class="price">+$2</span></label>
 
                 <h2>Quantity</h2>
                 <input type="number" id="quantitySelect" value="1" min="1" style="width: 50px; margin-bottom: 20px;">
@@ -369,7 +369,9 @@ error_reporting(E_ALL);
         </div>
     </div>
     
-    
+    <footer style="background-color: #CBC3E3; color: white; text-align: center; padding: 10px 0; position: absolute; bottom: 0; width: 100%;">
+        <p>&copy; <?= date("Y") ?> Manya&Jem's Acai Project. All rights reserved.</p>
+    </footer>
 
 </body>
 <script>

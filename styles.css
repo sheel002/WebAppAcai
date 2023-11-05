@@ -1,8 +1,19 @@
 /* Index Design */
 /* Reset default margin and padding for the body and header */
-body, header {
+body {
     margin: 0;
-    padding: 0;
+    padding-bottom: 60px; /* Adjust this value to the height of your footer */
+    font-family: Lato, sans-serif;
+    background-color: #F8E4E4;
+    min-height: 100%;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    /* No position absolute or fixed */
 }
 
 body {
@@ -53,7 +64,7 @@ li {
 	margin-right: 60px;
 	display: flex;
     text-align: center;
-
+    font-weight: bold;
 	padding: 10px 20px; /* Add padding for spacing around the navigation */
 }   
 
@@ -132,7 +143,7 @@ li {
 
 .outlet {
     flex: 1; 
-    padding: 0 15px; /* This gives some spacing between the outlets */
+    padding: 20px 15px; /* This gives some spacing between the outlets */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -180,7 +191,7 @@ li {
 .contact-section {
     padding: 30px;
     text-align: center;
-    background-color: #F8E4E4; /* Updated background color */
+   
     border-radius: 10px;
 }
 
@@ -210,6 +221,7 @@ li {
 }
 
 /* Error tooltip */
+
 .error-tooltip {
     display: none;
     padding: 2px 4px;  /* Further reduced padding */

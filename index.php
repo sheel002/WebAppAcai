@@ -59,6 +59,7 @@ error_reporting(E_ALL);
             <img src="Assets/homebg.png" alt="Homepage Banner">
         </div>
     </div>
+    
 </body>
 </body>
 </html>

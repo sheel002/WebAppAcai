@@ -83,6 +83,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-family: Lato, sans-serif;
             background-color: #F8E4E4;
         }
+        .error {
+  color: #ff0000; /* Red color for errors */
+  background-color: #ffecec; /* Light red background */
+  border: 1px solid #ff0000; /* Red border */
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 0.9em; /* Smaller font size */
+}
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">

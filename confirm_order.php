@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('db_connection.php');
+require "/Applications/XAMPP/xamppfiles/htdocs/mail_patch.php";
+use function mail_patch\mail;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -21,6 +23,26 @@ if (empty($cartItems)) {
 
 $userId = $_SESSION['user_id']; 
 $conn->autocommit(FALSE);
+
+function sendOrderConfirmationEmail($to, $subject, $cartItems) {
+    $message = "<!DOCTYPE html><html><body>";
+    $message .= "<h1>Order Confirmation</h1>";
+    $message .= "<p>Thank you for your order. Here are the details:</p>";
+    $message .= "<ul>";
+    foreach ($cartItems as $item) {
+        $message .= "<li>" . htmlspecialchars($item['name']) . " - Size: " . htmlspecialchars($item['size']) . " - Quantity: " . intval($item['quantity']) . "</li>";
+    }
+    $message .= "</ul>";
+    $message .= "</body></html>";
+
+    $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+    $headers .= 'From: f32ee@localhost' . "\r\n" .
+    'Reply-To: f32ee@localhost' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+    mail($to, $subject, $message, $headers,'-ff32ee@localhost');
+}
 
 try {
     $insertStmt = $conn->prepare("INSERT INTO user_cart (user_id, product_name, product_price, size, quantity, category, add_ons, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
@@ -47,6 +69,10 @@ try {
     $conn->commit();
     $_SESSION['cart'] = [];
     echo json_encode(["success" => true, "message" => "Order confirmed successfully"]);
+
+    // Send an email with the order details.
+    sendOrderConfirmationEmail('f32ee@localhost', 'Your Order Confirmation', $cartItems);
+
 } catch (Exception $e) {
     $conn->rollback();
     echo json_encode(["success" => false, "message" => "Error in confirming order: " . $e->getMessage()]);
